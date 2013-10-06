@@ -4,5 +4,6 @@
     <string name="app_name">Elephant</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="buttonlabel_newphoto">New photo</string>
 
 </resources>
