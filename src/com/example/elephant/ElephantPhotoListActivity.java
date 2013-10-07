@@ -18,11 +18,8 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -30,7 +27,7 @@ import com.parse.SaveCallback;
 public class ElephantPhotoListActivity extends ListActivity {
 	
 	private ParseQueryAdapter<ElephantPhoto> mainAdapter;
-	
+	private static final int USER_LOGIN_CODE = 101;
 	private static final int TAKE_PHOTO_CODE = 102;
 	private Uri photoPath;
 
@@ -38,46 +35,41 @@ public class ElephantPhotoListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//getListView().setBackgroundColor(Color.BLUE);
 		Drawable bg = getResources().getDrawable(R.drawable.blur);
 		getListView().setBackground(bg);
-		
-		 ParseObject.registerSubclass(ElephantPhoto.class);
-		 Parse.initialize(this, "squsUjhTdehGpFPumjW0KjxP7SPrsKsuYnRclVxI", "cSbjuBchn4m1DnjKfqHW2HeRNDoe4TGJJG1IDP4Q"); 
-		 ParseUser.enableAutomaticUser();
-		 ParseACL defaultACL = new ParseACL();
-		 defaultACL.setPublicReadAccess(true);
-		 ParseACL.setDefaultACL(defaultACL, true);
-		
-		 
-		 mainAdapter = new ParseQueryAdapter<ElephantPhoto>(this, ElephantPhoto.class);
-		 mainAdapter.setTextKey("question");
-		 mainAdapter.setImageKey("imageThumb");
 
+		 
+		mainAdapter = new ParseQueryAdapter<ElephantPhoto>(this, ElephantPhoto.class);
+		mainAdapter.setTextKey("question");
+		mainAdapter.setImageKey("imageThumb");
 		setListAdapter(mainAdapter);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
 	    switch (item.getItemId()) {
+	    	// Taking a new photo
 	        case R.id.new_photo:
 	        	
-	        	Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	        	Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    	    File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "tmp.jpg");
 	    	    photoPath = Uri.fromFile(f);
-	    	    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
-	    	    startActivityForResult(intent, TAKE_PHOTO_CODE);
-	    	    
-	        	
+	    	    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
+	    	    startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
+	    	   
 	            return true;
+	        case R.id.logout:
+	        	ParseUser.logOut();
+	        	Intent loginIntent = new Intent(this, LoginActivity.class);
+	    		startActivity(loginIntent);	
+	    		finish();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -86,9 +78,9 @@ public class ElephantPhotoListActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
-		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {	        
-	        
+		
+		// Returning from taking new photo
+		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {	                
 	        try { 
 	            InputStream stream = getContentResolver().openInputStream(photoPath);       
 	            Bitmap bitmap = BitmapFactory.decodeStream(stream);
@@ -101,10 +93,19 @@ public class ElephantPhotoListActivity extends ListActivity {
 	        }
 	        catch (IOException e) {
 	            e.printStackTrace();
-	        }   
-	        
-	    }		
+	        }           
+	    }
+		
+		// Returning from user login
+		if (requestCode == USER_LOGIN_CODE && resultCode == RESULT_OK) {
+			refreshElephantPhotoList();
+		}
 	 }
+	
+	private void refreshElephantPhotoList() {
+		mainAdapter.loadObjects();
+		setListAdapter(mainAdapter);
+	}
 	
 	private void newElephantPhoto(Bitmap bitmap) {
 		ByteArrayOutputStream stream1 = new ByteArrayOutputStream();
