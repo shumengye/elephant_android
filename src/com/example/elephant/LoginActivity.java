@@ -28,8 +28,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		// Skip login view if user is already logged in
 		ParseUser currentUser = ParseUser.getCurrentUser();
 		if (currentUser != null) {
-			System.out.println("current " + currentUser);
-			onSuccessfulLogin();
+			onLogin();
 		} 
 		
 		setContentView(R.layout.activity_login);
@@ -76,10 +75,11 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 	}
 
 	@Override
-	public void onSuccessfulLogin() {
+	public void onLogin() {
 		Intent intent = new Intent(this, ElephantPhotoListActivity.class);
 		startActivity(intent);	
 		finish();
 	}
+
 
 }

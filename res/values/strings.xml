@@ -7,10 +7,11 @@
     <string name="buttonlabel_newphoto">New photo</string>
     <string name="buttonlabel_login">Log in</string>
     <string name="buttonlabel_logout">Log out</string>
-    <string name="label_signuplink">Sign up</string>
-    <string name="test">weasdafa</string>
-    <string name="label_loginlink">Login now</string>
     <string name="buttonlabel_signup">Sign up</string>
+        
+    <string name="label_signuplink">Sign up now</string>
+    <string name="label_loginlink">Log in now</string>
+
     <string name="textfieldlabel_username">Username</string>
     <string name="textfieldlabel_password">Password</string>
 

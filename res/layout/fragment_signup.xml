@@ -2,6 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+    
+    <!--  Dummy item to prevent auto focus on form -->
+    <LinearLayout
+    android:focusable="true" android:focusableInTouchMode="true"
+    android:layout_width="0px" android:layout_height="0px"/>
 
     <EditText
         android:id="@+id/signupUsername"
@@ -36,13 +41,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
         android:text="@string/buttonlabel_signup" />
-
-    <Button
-        android:id="@+id/goToLoginButton"
+    
+      <TextView
+        android:id="@+id/goToLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signupButton"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signupButton"
         android:layout_marginTop="32dp"
         android:text="@string/label_loginlink" />
 

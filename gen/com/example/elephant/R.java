@@ -27,8 +27,8 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f08000b;
         public static final int fragmentLayout=0x7f080000;
-        public static final int goToLoginButton=0x7f080008;
-        public static final int goToSignUpButton=0x7f080004;
+        public static final int goToLogin=0x7f080008;
+        public static final int goToSignup=0x7f080004;
         public static final int loginButton=0x7f080003;
         public static final int loginPassword=0x7f080002;
         public static final int loginUsername=0x7f080001;
@@ -52,13 +52,12 @@ public final class R {
         public static final int buttonlabel_login=0x7f050004;
         public static final int buttonlabel_logout=0x7f050005;
         public static final int buttonlabel_newphoto=0x7f050003;
-        public static final int buttonlabel_signup=0x7f050009;
+        public static final int buttonlabel_signup=0x7f050006;
         public static final int hello_world=0x7f050002;
         public static final int label_loginlink=0x7f050008;
-        public static final int label_signuplink=0x7f050006;
-        public static final int test=0x7f050007;
-        public static final int textfieldlabel_password=0x7f05000b;
-        public static final int textfieldlabel_username=0x7f05000a;
+        public static final int label_signuplink=0x7f050007;
+        public static final int textfieldlabel_password=0x7f05000a;
+        public static final int textfieldlabel_username=0x7f050009;
     }
     public static final class style {
         /** 
