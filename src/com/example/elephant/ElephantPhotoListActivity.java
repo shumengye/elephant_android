@@ -1,15 +1,9 @@
 package com.example.elephant;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,12 +11,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 public class ElephantPhotoListActivity extends ListActivity {
 	
@@ -108,5 +101,16 @@ public class ElephantPhotoListActivity extends ListActivity {
 	private void refreshElephantPhotoList() {
 		mainAdapter.loadObjects();
 		setListAdapter(mainAdapter);
+	}
+	
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		
+		// Open detail view for selected photo
+		ElephantPhoto photo = (ElephantPhoto) getListAdapter().getItem(position);
+		Intent intent = new Intent(this, ElephantPhotoDetailActivity.class);
+		intent.putExtra("photoId", photo.getObjectId());
+		startActivity(intent);	 
+
 	}
 }

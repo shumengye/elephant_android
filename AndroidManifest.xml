@@ -36,10 +36,15 @@
             android:label="@string/app_name" >   
         </activity>
         
-        <activity android:name=".NewElephantPhotoActivity"
+        <activity android:name="com.example.elephant.NewElephantPhotoActivity"
           android:label="@string/app_name"
           android:screenOrientation="portrait">
 		</activity>
+		
+         <activity
+            android:name="com.example.elephant.ElephantPhotoDetailActivity"
+            android:label="@string/app_name" >   
+        </activity>
     </application>
 
 </manifest>
