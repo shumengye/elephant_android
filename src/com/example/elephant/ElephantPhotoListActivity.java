@@ -29,6 +29,7 @@ public class ElephantPhotoListActivity extends ListActivity {
 	private ParseQueryAdapter<ElephantPhoto> mainAdapter;
 	private static final int USER_LOGIN_CODE = 101;
 	private static final int TAKE_PHOTO_CODE = 102;
+	private static final int NEW_PHOTO_CODE = 102;
 	private Uri photoPath;
 
 	@Override
@@ -50,20 +51,24 @@ public class ElephantPhotoListActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+	 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	    	// Taking a new photo
 	        case R.id.new_photo:
-	        	
 	        	Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 	    	    File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "tmp.jpg");
 	    	    photoPath = Uri.fromFile(f);
 	    	    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoPath);
 	    	    startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
-	    	   
+	        	
 	            return true;
+	        // Refresh list 
+	        case R.id.refresh:
+	        	refreshElephantPhotoList(); 
+	        	return true;
+	        // Logout
 	        case R.id.logout:
 	        	ParseUser.logOut();
 	        	Intent loginIntent = new Intent(this, LoginActivity.class);
@@ -79,51 +84,29 @@ public class ElephantPhotoListActivity extends ListActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		// Returning from taking new photo
-		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {	                
-	        try { 
-	            InputStream stream = getContentResolver().openInputStream(photoPath);       
-	            Bitmap bitmap = BitmapFactory.decodeStream(stream);
-	            stream.close();
-     
-	            newElephantPhoto(bitmap);
-	            
-	        }catch (FileNotFoundException e) {
-	            e.printStackTrace();
-	        }
-	        catch (IOException e) {
-	            e.printStackTrace();
-	        }           
-	    }
-		
 		// Returning from user login
 		if (requestCode == USER_LOGIN_CODE && resultCode == RESULT_OK) {
 			refreshElephantPhotoList();
 		}
+		
+		// Returning from taking photo with camera
+		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {    		
+			
+			 System.out.println("opening new photo view");
+	            // Start activity to create new elephant photo with question / comment
+				Intent newPhotoIntent = new Intent(this, NewElephantPhotoActivity.class);
+				newPhotoIntent.putExtra("photoPath", photoPath);
+	    		startActivityForResult(newPhotoIntent, NEW_PHOTO_CODE);	 
+	    }
+		
+		// Returning from creating new elephant photo
+		if (requestCode == NEW_PHOTO_CODE && resultCode == RESULT_OK) {
+			refreshElephantPhotoList();
+		}	
 	 }
 	
 	private void refreshElephantPhotoList() {
 		mainAdapter.loadObjects();
 		setListAdapter(mainAdapter);
-	}
-	
-	private void newElephantPhoto(Bitmap bitmap) {
-		ByteArrayOutputStream stream1 = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream1);
-		byte[] imageBytes = stream1.toByteArray();
-		
-		ElephantPhoto photo = new ElephantPhoto();
-        photo.setQuestion("What is this?");
-        photo.setSenderName("test user");
-        ParseFile imageFile= new ParseFile("test.jpg", imageBytes);
-        photo.setImageFile(imageFile);
-        photo.setImageThumb(imageFile);
-        
-        photo.saveInBackground(new SaveCallback() {
-			@Override
-			public void done(ParseException e) {
-				// TODO Auto-generated method stub  
-			}
-        });
 	}
 }

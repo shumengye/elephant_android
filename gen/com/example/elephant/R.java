@@ -25,23 +25,28 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000b;
+        public static final int RelativeLayout1=0x7f080001;
         public static final int fragmentLayout=0x7f080000;
-        public static final int goToLogin=0x7f080008;
-        public static final int goToSignup=0x7f080004;
-        public static final int loginButton=0x7f080003;
-        public static final int loginPassword=0x7f080002;
-        public static final int loginUsername=0x7f080001;
-        public static final int logout=0x7f08000a;
-        public static final int new_photo=0x7f080009;
-        public static final int signupButton=0x7f080007;
-        public static final int signupPassword=0x7f080006;
-        public static final int signupUsername=0x7f080005;
+        public static final int goToLogin=0x7f08000c;
+        public static final int goToSignup=0x7f080008;
+        public static final int imagePreview=0x7f080002;
+        public static final int loginButton=0x7f080007;
+        public static final int loginPassword=0x7f080006;
+        public static final int loginUsername=0x7f080005;
+        public static final int logout=0x7f08000f;
+        public static final int newPhotoButton=0x7f080004;
+        public static final int new_photo=0x7f08000d;
+        public static final int photoQuestion=0x7f080003;
+        public static final int refresh=0x7f08000e;
+        public static final int signupButton=0x7f08000b;
+        public static final int signupPassword=0x7f08000a;
+        public static final int signupUsername=0x7f080009;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
-        public static final int fragment_login=0x7f030001;
-        public static final int fragment_signup=0x7f030002;
+        public static final int activity_new_photo=0x7f030001;
+        public static final int fragment_login=0x7f030002;
+        public static final int fragment_signup=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -49,15 +54,18 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int buttonlabel_login=0x7f050004;
-        public static final int buttonlabel_logout=0x7f050005;
+        public static final int buttonlabel_login=0x7f050005;
+        public static final int buttonlabel_logout=0x7f050006;
         public static final int buttonlabel_newphoto=0x7f050003;
-        public static final int buttonlabel_signup=0x7f050006;
+        public static final int buttonlabel_refresh=0x7f050004;
+        public static final int buttonlabel_signup=0x7f050007;
         public static final int hello_world=0x7f050002;
-        public static final int label_loginlink=0x7f050008;
-        public static final int label_signuplink=0x7f050007;
-        public static final int textfieldlabel_password=0x7f05000a;
-        public static final int textfieldlabel_username=0x7f050009;
+        public static final int label_loginlink=0x7f050009;
+        public static final int label_photo_question=0x7f05000c;
+        public static final int label_signuplink=0x7f050008;
+        public static final int ok=0x7f05000d;
+        public static final int textfieldlabel_password=0x7f05000b;
+        public static final int textfieldlabel_username=0x7f05000a;
     }
     public static final class style {
         /** 
