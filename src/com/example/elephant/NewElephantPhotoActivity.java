@@ -29,7 +29,6 @@ public class NewElephantPhotoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_photo);
-		
 				
 		Uri photoPath = (Uri) getIntent().getExtras().get("photoPath");
 		if (photoPath != null) {		

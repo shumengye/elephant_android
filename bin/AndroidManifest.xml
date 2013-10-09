@@ -22,6 +22,7 @@
         
         <activity
             android:name="com.example.elephant.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,6 +34,7 @@
         
         <activity
             android:name="com.example.elephant.ElephantPhotoListActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >   
         </activity>
         
@@ -43,6 +45,7 @@
 		
          <activity
             android:name="com.example.elephant.ElephantPhotoDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >   
         </activity>
     </application>
