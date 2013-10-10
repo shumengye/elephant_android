@@ -21,7 +21,6 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		ParseObject.registerSubclass(Photo.class);
 		ParseObject.registerSubclass(PhotoComment.class);
 		Parse.initialize(this, "squsUjhTdehGpFPumjW0KjxP7SPrsKsuYnRclVxI", "cSbjuBchn4m1DnjKfqHW2HeRNDoe4TGJJG1IDP4Q"); 
-		//ParseUser.enableAutomaticUser();
 		ParseACL defaultACL = new ParseACL();
 		defaultACL.setPublicReadAccess(true);
 		ParseACL.setDefaultACL(defaultACL, true);
@@ -45,7 +44,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main,
+		getMenuInflater().inflate(R.menu.login,
                          menu);
 		return true;
 	}

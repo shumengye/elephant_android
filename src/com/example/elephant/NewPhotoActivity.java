@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ public class NewPhotoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_photo);
+		// Show "up" navigation back to parent activity
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Uri photoPath = (Uri) getIntent().getExtras().get("photoPath");
 		if (photoPath != null) {		
@@ -56,6 +59,12 @@ public class NewPhotoActivity extends Activity {
 	    		newElephantPhoto();
 	        }
 	    });
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.simple, menu);
+		return true;
 	}
 	
 	private void newElephantPhoto() {

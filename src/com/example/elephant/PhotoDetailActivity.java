@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -65,6 +66,12 @@ public class PhotoDetailActivity extends Activity {
 
 		transaction.add(R.id.fragmentLayout, commentsFragment);	
 		transaction.commit();  
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.simple, menu);
+		return true;
 	}
 	
 	private void showPhoto(String objectId) {

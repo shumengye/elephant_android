@@ -40,13 +40,23 @@
         
         <activity android:name="com.example.elephant.NewPhotoActivity"
           android:label="@string/app_name"
-          android:screenOrientation="portrait">
+          android:screenOrientation="portrait" 
+          android:parentActivityName="com.example.elephant.PhotoListActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+       		<meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.elephant.PhotoListActivity" />
 		</activity>
 		
          <activity
             android:name="com.example.elephant.PhotoDetailActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name" >   
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.elephant.PhotoListActivity" >
+       		<!-- Parent activity meta-data to support 4.0 and lower -->
+       		<meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.elephant.PhotoListActivity" />   
         </activity>
     </application>
 
