@@ -18,7 +18,8 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ParseObject.registerSubclass(ElephantPhoto.class);
+		ParseObject.registerSubclass(Photo.class);
+		ParseObject.registerSubclass(PhotoComment.class);
 		Parse.initialize(this, "squsUjhTdehGpFPumjW0KjxP7SPrsKsuYnRclVxI", "cSbjuBchn4m1DnjKfqHW2HeRNDoe4TGJJG1IDP4Q"); 
 		//ParseUser.enableAutomaticUser();
 		ParseACL defaultACL = new ParseACL();
@@ -76,7 +77,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 
 	@Override
 	public void onLogin() {
-		Intent intent = new Intent(this, ElephantPhotoListActivity.class);
+		Intent intent = new Intent(this, PhotoListActivity.class);
 		startActivity(intent);	
 		finish();
 	}

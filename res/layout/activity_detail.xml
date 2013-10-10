@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/blur" />
 
@@ -15,7 +15,16 @@
         android:id="@+id/imageMask"
         android:layout_width="1200dp"
         android:layout_height="1200dp"
+        android:layout_gravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/blur2" />
+
+      <RelativeLayout
+          android:id="@+id/fragmentLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom" >
+
+      </RelativeLayout>
 
 </FrameLayout>

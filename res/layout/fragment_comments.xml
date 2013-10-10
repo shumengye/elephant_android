@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SlidingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/content"
+        android:handle="@+id/handle" >
+        
+        <TextView
+        android:id="@+id/handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/label_signuplink" />
+
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            
+            <ListView android:id="@id/android:list"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="#00FF00"
+               android:layout_alignParentTop="true"
+               android:drawSelectorOnTop="false" />
+            
+        	<LinearLayout 
+        	    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			     android:layout_alignParentBottom="true">
+			    
+                <EditText
+			        android:id="@+id/newComment"
+			        android:layout_width="0dip"
+			        android:layout_height="wrap_content"
+			        android:focusable="true"
+			        android:layout_weight="1"
+			        android:ems="10"
+			        android:hint="@string/textfieldlabel_username"
+			        android:inputType="text" />
+                
+                <Button
+                    android:id="@+id/newCommentButton"
+			        android:layout_width="100dp"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="right"
+			        android:text="@string/ok" />
+                
+            </LinearLayout>	    
+            
+        </RelativeLayout>
+        
+        
+        
+</SlidingDrawer>
