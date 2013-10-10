@@ -12,8 +12,11 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.parse.ParseObject;
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
@@ -31,11 +34,12 @@ public class PhotoListActivity extends ListActivity {
 
 		Drawable bg = getResources().getDrawable(R.drawable.blur);
 		getListView().setBackground(bg);
-
-		 
-		mainAdapter = new ParseQueryAdapter<Photo>(this, Photo.class);
+		
+		
+		mainAdapter = new PhotoListAdapter(this);
 		mainAdapter.setTextKey("question");
-		mainAdapter.setImageKey("imageThumb");
+		//mainAdapter.setImageKey("imageThumb");
+		
 		setListAdapter(mainAdapter);
 	}
 
@@ -44,6 +48,8 @@ public class PhotoListActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	
 	 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

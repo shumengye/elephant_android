@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.parse.LogInCallback;
@@ -18,6 +19,7 @@ import com.parse.ParseUser;
 public class LoginFragment extends Fragment {
 	
 	private View view;
+	private ProgressBar loader;
 	LoginViewListener activityCallback;
 
 	public interface LoginViewListener {
@@ -40,6 +42,10 @@ public class LoginFragment extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_login, container, false);
+        
+        // Progress indicator
+       loader = (ProgressBar) view.findViewById(R.id.loader);
+       loader.setVisibility(View.GONE);
 		
         // Link for switching to signup view
 		final TextView goToSignUp = (TextView) view.findViewById(R.id.goToSignup);
@@ -62,6 +68,7 @@ public class LoginFragment extends Fragment {
 	
 	
 	private void loginUser() {	
+		loader.setVisibility(View.VISIBLE);
 		final String username = ((EditText) view.findViewById(R.id.loginUsername)).getText().toString();
 		final String password = ((EditText) view.findViewById(R.id.loginPassword)).getText().toString();
 		
@@ -69,6 +76,7 @@ public class LoginFragment extends Fragment {
 			public void done(ParseUser user, ParseException e) {
 			    if (user != null) {
 			    	// Notify activity of successful login
+			    	loader.setVisibility(View.GONE);
 			    	activityCallback.onLogin();
 			    } else 
 			    	Log.e("Login error", "Login failed " + e.toString());

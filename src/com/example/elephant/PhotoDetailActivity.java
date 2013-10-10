@@ -72,7 +72,7 @@ public class PhotoDetailActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.simple, menu);
 		return true;
-	}
+	} 
 	
 	private void showPhoto(String objectId) {
 		// Get Parse photo object

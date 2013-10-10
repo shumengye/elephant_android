@@ -33,36 +33,41 @@ public final class R {
     public static final class id {
         public static final int FrameLayout1=0x7f080000;
         public static final int RelativeLayout1=0x7f080004;
-        public static final int content=0x7f080009;
+        public static final int content=0x7f08000c;
         public static final int fragmentLayout=0x7f080003;
-        public static final int goToLogin=0x7f080014;
-        public static final int goToSignup=0x7f080010;
-        public static final int handle=0x7f08000a;
+        public static final int goToLogin=0x7f080018;
+        public static final int goToSignup=0x7f080014;
+        public static final int handle=0x7f08000d;
+        public static final int icon=0x7f080008;
         public static final int imageMask=0x7f080002;
         public static final int imagePreview=0x7f080005;
         public static final int imageView1=0x7f080001;
-        public static final int loginButton=0x7f08000f;
-        public static final int loginPassword=0x7f08000e;
-        public static final int loginUsername=0x7f08000d;
-        public static final int logout=0x7f080017;
-        public static final int newComment=0x7f08000b;
-        public static final int newCommentButton=0x7f08000c;
+        public static final int loader=0x7f080013;
+        public static final int loginButton=0x7f080012;
+        public static final int loginPassword=0x7f080011;
+        public static final int loginUsername=0x7f080010;
+        public static final int logout=0x7f08001b;
+        public static final int newComment=0x7f08000e;
+        public static final int newCommentButton=0x7f08000f;
         public static final int newPhotoButton=0x7f080007;
-        public static final int new_photo=0x7f080015;
+        public static final int new_photo=0x7f080019;
         public static final int photoQuestion=0x7f080006;
-        public static final int refresh=0x7f080016;
-        public static final int signupButton=0x7f080013;
-        public static final int signupPassword=0x7f080012;
-        public static final int signupUsername=0x7f080011;
-        public static final int slidingDrawer1=0x7f080008;
+        public static final int question=0x7f080009;
+        public static final int refresh=0x7f08001a;
+        public static final int senderName=0x7f08000a;
+        public static final int signupButton=0x7f080017;
+        public static final int signupPassword=0x7f080016;
+        public static final int signupUsername=0x7f080015;
+        public static final int slidingDrawer1=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_new_photo=0x7f030002;
-        public static final int fragment_comments=0x7f030003;
-        public static final int fragment_login=0x7f030004;
-        public static final int fragment_signup=0x7f030005;
+        public static final int adapter_item=0x7f030003;
+        public static final int fragment_comments=0x7f030004;
+        public static final int fragment_login=0x7f030005;
+        public static final int fragment_signup=0x7f030006;
     }
     public static final class menu {
         public static final int login=0x7f070000;
