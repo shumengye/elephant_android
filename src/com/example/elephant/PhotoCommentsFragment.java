@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -33,12 +35,13 @@ public class PhotoCommentsFragment extends ListFragment {
         // Comments list, fetch comments from Parse
         mainAdapter = new ParseQueryAdapter<PhotoComment>(this.getActivity(), new ParseQueryAdapter.QueryFactory<PhotoComment>() {
             public ParseQuery<PhotoComment> create() {
-                // Reference to parent phto
+                // Reference to parent photo
             	Photo parent = new Photo();
             	parent.setObjectId(photoId);
             	
                 ParseQuery<PhotoComment> query = new ParseQuery<PhotoComment>("PhotoComment");
                 query.whereEqualTo("parent", parent);
+                query.orderByDescending("createdAt");
                 return query;
               }
             });
@@ -74,6 +77,7 @@ public class PhotoCommentsFragment extends ListFragment {
 		loader.setIndeterminate(true);
 		loader.show();
 		
+		// Create new comment
         PhotoComment comment = new PhotoComment();
         ParseUser currentUser = ParseUser.getCurrentUser();
         comment.setUser(currentUser);
@@ -85,8 +89,8 @@ public class PhotoCommentsFragment extends ListFragment {
         
         Photo parent = new Photo();
     	parent.setObjectId(photoId);
-    	comment.setParent(parent);
-
+    	comment.setParent(parent); 
+    	 
         comment.saveInBackground(new SaveCallback() {
 
 			@Override

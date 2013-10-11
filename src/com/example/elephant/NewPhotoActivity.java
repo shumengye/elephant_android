@@ -7,14 +7,16 @@ import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.AvoidXfermode.Mode;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -91,12 +93,12 @@ public class NewPhotoActivity extends Activity {
         photo.setSender(currentUser);
         photo.setSenderName(currentUser.getUsername());
         
-        ParseFile imageFile= new ParseFile("image.jpg", bitmapToData(bitmap, 50));
+        ParseFile imageFile= new ParseFile("image.jpg", bitmapToData(bitmap, Bitmap.CompressFormat.JPEG, 50));
         photo.setImageFile(imageFile);
         
         Bitmap thumbBitmap = createThumbnail(bitmap);
         
-		ParseFile imageThumb = new ParseFile("thumb.jpg", bitmapToData(thumbBitmap, 50));
+		ParseFile imageThumb = new ParseFile("thumb.jpg", bitmapToData(thumbBitmap, Bitmap.CompressFormat.PNG, 80));
 		photo.setImageThumb(imageThumb);
 		 
         photo.saveInBackground(new SaveCallback() {
@@ -114,9 +116,9 @@ public class NewPhotoActivity extends Activity {
         });
 	}
 	
-	private byte[] bitmapToData(Bitmap origBmp, int quality) {
+	private byte[] bitmapToData(Bitmap origBmp, CompressFormat f, int quality) {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        origBmp.compress(Bitmap.CompressFormat.JPEG, quality, stream);
+        origBmp.compress(f, quality, stream);
 		return stream.toByteArray();
 	}
 	 
@@ -132,8 +134,31 @@ public class NewPhotoActivity extends Activity {
 		int startY = (origBmp.getHeight() / 2) - (d / 2);		
 				
 		Bitmap thumb = Bitmap.createBitmap(origBmp, startX, startY, d, d);
+		thumb = getRoundedCornerBitmap(thumb, 30);
 		
 		return thumb;
+	}
+	
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+	    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+	            .getHeight(), Config.ARGB_8888);
+	    Canvas canvas = new Canvas(output);
+
+	    final int color = 0xff424242;
+	    final Paint paint = new Paint();
+	    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+	    final RectF rectF = new RectF(rect);
+	    final float roundPx = pixels;
+
+	    paint.setAntiAlias(true);
+	    canvas.drawARGB(0, 0, 0, 0);
+	    paint.setColor(color);
+	    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+	    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+	    canvas.drawBitmap(bitmap, rect, rect, paint);
+
+	    return output;
 	}
 
 }

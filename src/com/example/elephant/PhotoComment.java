@@ -2,6 +2,7 @@ package com.example.elephant;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 @ParseClassName("PhotoComment")
@@ -40,7 +41,8 @@ public class PhotoComment extends ParseObject {
 	}
 
 	public void setParent(Photo parent) {
-		put("parent", parent);
+		ParseRelation<Photo> relation = this.getRelation("parent");
+    	relation.add(parent);
 	}
 	
 }

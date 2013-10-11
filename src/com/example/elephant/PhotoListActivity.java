@@ -87,8 +87,7 @@ public class PhotoListActivity extends ListActivity {
 		}
 		
 		// Returning from taking photo with camera
-		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {    		
-			
+		if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {    				
 			 System.out.println("opening new photo view");
 	            // Start activity to create new elephant photo with question / comment
 				Intent newPhotoIntent = new Intent(this, NewPhotoActivity.class);
