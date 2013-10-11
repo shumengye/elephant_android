@@ -32,13 +32,13 @@ public class PhotoListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		Drawable bg = getResources().getDrawable(R.drawable.blur);
-		getListView().setBackground(bg);
-		
+		//Drawable bg = getResources().getDrawable(R.drawable.blur);
+		//getListView().setBackground(bg);
+		getListView().setDividerHeight(0);
+		getListView().setDivider(null);
 		
 		mainAdapter = new PhotoListAdapter(this);
 		mainAdapter.setTextKey("question");
-		//mainAdapter.setImageKey("imageThumb");
 		
 		setListAdapter(mainAdapter);
 	}
@@ -48,8 +48,6 @@ public class PhotoListActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	
 	 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

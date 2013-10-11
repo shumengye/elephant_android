@@ -1,16 +1,17 @@
 package com.example.elephant;
 
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
+import android.view.MenuItem;
+
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 public class LoginActivity extends FragmentActivity implements LoginFragment.LoginViewListener, SignupFragment.SignupViewListener  {
 	
@@ -44,9 +45,30 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.login,
-                         menu);
+		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+	    switch (item.getItemId()) {
+	    	// Toggle signup and login screens
+	        case R.id.goToSignup:
+	        	
+	        	if (item.getTitle().equals("Sign up")) {
+	        		item.setTitle("Log in");
+	        		onShowSignUp();
+	        	}
+	        	else {
+	        		item.setTitle("Sign up");
+	        		onShowLogin();
+	        	}
+	        	
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	@Override

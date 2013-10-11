@@ -9,15 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/blur" />
+       />
 
     <ImageView
         android:id="@+id/imageMask"
         android:layout_width="1200dp"
-        android:layout_height="1200dp"
+        android:layout_height="1920dp"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/blur2" />
+        android:src="@drawable/mask" />
 
       <RelativeLayout
           android:id="@+id/fragmentLayout"

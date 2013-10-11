@@ -6,8 +6,15 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.graphics.AvoidXfermode.Mode;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,6 +75,12 @@ public class NewPhotoActivity extends Activity {
 	}
 	
 	private void newElephantPhoto() {
+		// Show progress loader
+		final ProgressDialog loader = new ProgressDialog(this);
+		loader.setMessage("Uploading new photo...");
+		loader.setCancelable(false);
+		loader.setIndeterminate(true);
+		loader.show();
 		
 		Photo photo = new Photo();
 		
@@ -90,6 +103,8 @@ public class NewPhotoActivity extends Activity {
 			
         	@Override
 			public void done(ParseException e) {
+        		loader.dismiss();
+        		
 				if (e == null) {
 					finish();
 				}
@@ -117,6 +132,8 @@ public class NewPhotoActivity extends Activity {
 		int startY = (origBmp.getHeight() / 2) - (d / 2);		
 				
 		Bitmap thumb = Bitmap.createBitmap(origBmp, startX, startY, d, d);
+		
 		return thumb;
 	}
+
 }

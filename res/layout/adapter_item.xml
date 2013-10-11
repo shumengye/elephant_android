@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+ 
     <com.parse.ParseImageView
         android:id="@+id/icon"
         android:layout_width="100dp"

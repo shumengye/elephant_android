@@ -2,6 +2,7 @@ package com.example.elephant;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -41,14 +41,6 @@ public class SignupFragment extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_signup, container, false);
-
-        // Link for switching to login view
-		final TextView goToLogin = (TextView) view.findViewById(R.id.goToLogin);
-		goToLogin.setOnClickListener(new View.OnClickListener() {
-	    	public void onClick(View v) {
-	    		 activityCallback.onShowLogin();
-	        }
-	    });
 		
 		// Submit button for signup form
 		final Button signupButton = (Button) view.findViewById(R.id.signupButton);
@@ -62,6 +54,13 @@ public class SignupFragment extends Fragment {
     }
 	
 	private void signupUser() {
+		// Show progress loader
+		final ProgressDialog loader = new ProgressDialog(this.getActivity());
+		loader.setMessage("Signing up...");
+		loader.setCancelable(false);
+		loader.setIndeterminate(true);
+		loader.show();
+				
 		final String username = ((EditText) view.findViewById(R.id.signupUsername)).getText().toString();
 		final String password = ((EditText) view.findViewById(R.id.signupPassword)).getText().toString();
 		
@@ -71,6 +70,7 @@ public class SignupFragment extends Fragment {
 		
 		user.signUpInBackground(new SignUpCallback() {
 		  public void done(ParseException e) {
+			loader.dismiss();
 		    if (e == null) {
 		    	// Automatically login user after signup
 		    	loginUser(username, password);
@@ -81,8 +81,17 @@ public class SignupFragment extends Fragment {
 	}
 	
 	private void loginUser(String username, String password) {
+		// Show progress loader
+		final ProgressDialog loader = new ProgressDialog(this.getActivity());
+		loader.setMessage("Logging in...");
+		loader.setCancelable(false);
+		loader.setIndeterminate(true);
+		loader.show();
+				
 		ParseUser.logInInBackground(username, password, new LogInCallback() {
 			public void done(ParseUser user, ParseException e) {
+				loader.dismiss();
+				
 			    if (user != null) {
 			    	// Notify activity of successful login
 			    	activityCallback.onLogin();

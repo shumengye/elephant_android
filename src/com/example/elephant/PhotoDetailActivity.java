@@ -3,6 +3,7 @@ package com.example.elephant;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,12 +39,6 @@ public class PhotoDetailActivity extends Activity {
 		photoId = (String) getIntent().getExtras().get("photoId");
 		showPhoto(photoId);
 		
-		// Photo info
-		//String senderName = (String) getIntent().getExtras().get("senderName");
-		//String question = (String) getIntent().getExtras().get("question");
-		//TextView photoInfo = (TextView) findViewById(R.id.handle);
-		//photoInfo.setText(senderName + ": " + question);
-		
 		// Move image mask on user touch event
 		maskView = (ImageView) findViewById(R.id.imageMask);
 		maskView.setOnTouchListener(
@@ -56,8 +51,7 @@ public class PhotoDetailActivity extends Activity {
 	        }
 		);
 		
-		// Comments fragment
-		
+		// Comments fragment	
 		PhotoCommentsFragment commentsFragment = new PhotoCommentsFragment();		   
 		commentsFragment.init(photoId);
 		
@@ -75,6 +69,13 @@ public class PhotoDetailActivity extends Activity {
 	} 
 	
 	private void showPhoto(String objectId) {
+		// Show progress loader
+		final ProgressDialog loader = new ProgressDialog(this);
+		loader.setMessage("Loading photo...");
+		loader.setCancelable(false);
+		loader.setIndeterminate(true);
+		loader.show();
+				
 		// Get Parse photo object
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("UserPhoto");
 		query.whereEqualTo("objectId", objectId);
@@ -89,6 +90,8 @@ public class PhotoDetailActivity extends Activity {
 
 						@Override
 						public void done(byte[] data, ParseException e) {
+							loader.dismiss(); 
+							
 							if (e == null) {
 								// Show photo in image view
 								final ImageView imageView = (ImageView) findViewById(R.id.imageView1);
@@ -101,6 +104,9 @@ public class PhotoDetailActivity extends Activity {
 						  
 					});
 				}
+				else
+					loader.dismiss(); 
+		
 			}
 		  
 		});

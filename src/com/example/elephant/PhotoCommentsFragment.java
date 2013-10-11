@@ -1,6 +1,7 @@
 package com.example.elephant;
 
 import android.app.ListFragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,6 +67,12 @@ public class PhotoCommentsFragment extends ListFragment {
 	}
 	
 	private void newComment() {
+		// Show progress loader
+		final ProgressDialog loader = new ProgressDialog(this.getActivity());
+		loader.setMessage("Adding comment...");
+		loader.setCancelable(false);
+		loader.setIndeterminate(true);
+		loader.show();
 		
         PhotoComment comment = new PhotoComment();
         ParseUser currentUser = ParseUser.getCurrentUser();
@@ -84,6 +91,8 @@ public class PhotoCommentsFragment extends ListFragment {
 
 			@Override
 			public void done(ParseException e) {
+				loader.dismiss();
+				
 				if (e == null) {
 					commentTextField.setText("");
 					refreshCommentList();
