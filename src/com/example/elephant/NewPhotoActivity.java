@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Bitmap.Config;
@@ -16,11 +17,13 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,8 +35,10 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class NewPhotoActivity extends Activity {
-	
 	private Bitmap bitmap;
+	private ImageView maskView;
+	private float mLastTouchX; // helper coordinates for dragging mask view
+	private float mLastTouchY;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,18 @@ public class NewPhotoActivity extends Activity {
 	    		newElephantPhoto();
 	        }
 	    });
+		
+		// Move image mask on user touch event
+		maskView = (ImageView) findViewById(R.id.imageMask);
+		maskView.setOnTouchListener(
+				new ImageView.OnTouchListener() {
+					@Override
+					public boolean onTouch(View arg0, MotionEvent arg1) {
+						onTouchEvent(arg1);
+		    			return true;
+					}
+				}
+		);
 	}
 	
 	@Override
@@ -76,17 +93,73 @@ public class NewPhotoActivity extends Activity {
 		return true;
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        // Logout
+	        case R.id.logout:
+	        	ParseUser.logOut();
+	        	Intent loginIntent = new Intent(this, LoginActivity.class);
+	        	loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    		startActivity(loginIntent);	
+	    		finish();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		int action = MotionEventCompat.getActionMasked(ev); 
+		
+		switch (action) { 
+		case MotionEvent.ACTION_DOWN: {
+		        final float x = ev.getRawX();
+		        final float y  = ev.getRawY();
+		        
+		        // Remember current touch position
+		        mLastTouchX = x;
+		        mLastTouchY = y;
+		            
+		        break;
+		    }
+		
+			case MotionEvent.ACTION_MOVE: {
+		        final float x = ev.getRawX();
+		        final float y  = ev.getRawY();
+		        
+		        
+		        // Calculate the distance moved
+		        final float dx = x - mLastTouchX;
+		        final float dy = y - mLastTouchY;
+		        
+		        // Update mask position
+		        maskView.setX(maskView.getX() + dx);
+		        maskView.setY(maskView.getY() + dy);
+		        
+		        // Remember current touch position
+		        mLastTouchX = x;
+		        mLastTouchY = y;
+		        break;
+	    	}
+		}
+		return false;
+	}
+	
 	private void newElephantPhoto() {
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this);
-		loader.setMessage("Uploading new photo...");
+		loader.setMessage(getString(R.string.message_uploadingphoto));
 		loader.setCancelable(false);
 		loader.setIndeterminate(true);
 		loader.show();
 		
 		Photo photo = new Photo();
 		
-		final String question = ((EditText) findViewById(R.id.photoQuestion)).getText().toString();
+		String question = ((EditText) findViewById(R.id.photoQuestion)).getText().toString();
+		if (question.length() == 0)
+			question = getString(R.string.hint_photo_question);
         photo.setQuestion(question);
         
         ParseUser currentUser = ParseUser.getCurrentUser();
@@ -98,7 +171,7 @@ public class NewPhotoActivity extends Activity {
         
         Bitmap thumbBitmap = createThumbnail(bitmap);
         
-		ParseFile imageThumb = new ParseFile("thumb.jpg", bitmapToData(thumbBitmap, Bitmap.CompressFormat.PNG, 80));
+		ParseFile imageThumb = new ParseFile("thumb.jpg", bitmapToData(thumbBitmap, Bitmap.CompressFormat.PNG, 90));
 		photo.setImageThumb(imageThumb);
 		 
         photo.saveInBackground(new SaveCallback() {
@@ -126,38 +199,37 @@ public class NewPhotoActivity extends Activity {
 		int w = origBmp.getWidth();
 		
 		// Dimension for thumbnail
-		int d = (int) (w / 16);
-		if (d < 100)
-			d = 100;
+		int d = (int) (w / 10);
+		if (d < 240)
+			d = 240;
 		
 		int startX = (origBmp.getWidth() / 2) - (d / 2);
 		int startY = (origBmp.getHeight() / 2) - (d / 2);		
 				
 		Bitmap thumb = Bitmap.createBitmap(origBmp, startX, startY, d, d);
-		thumb = getRoundedCornerBitmap(thumb, 30);
+		thumb = getRoundedCornerBitmap(thumb);
 		
 		return thumb;
 	}
 	
-	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
-	    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
-	            .getHeight(), Config.ARGB_8888);
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+	            bitmap.getHeight(), Config.ARGB_8888);
 	    Canvas canvas = new Canvas(output);
 
 	    final int color = 0xff424242;
 	    final Paint paint = new Paint();
 	    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-	    final RectF rectF = new RectF(rect);
-	    final float roundPx = pixels;
 
 	    paint.setAntiAlias(true);
 	    canvas.drawARGB(0, 0, 0, 0);
 	    paint.setColor(color);
-	    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
 
+	    canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+	            bitmap.getWidth() / 2, paint);
 	    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 	    canvas.drawBitmap(bitmap, rect, rect, paint);
-
+	   
 	    return output;
 	}
 

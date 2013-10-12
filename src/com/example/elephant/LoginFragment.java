@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment {
 	private void loginUser() {	
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this.getActivity());
-		loader.setMessage("Logging in...");
+		loader.setMessage(getString(R.string.message_login));
 		loader.setCancelable(false);
 		loader.setIndeterminate(true);
 		loader.show();

@@ -45,7 +45,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.login, menu);
+		getMenuInflater().inflate(R.menu.login, menu);		
 		return true;
 	}
 	

@@ -7,37 +7,47 @@
     android:focusable="true" android:focusableInTouchMode="true"
     android:layout_width="0px" android:layout_height="0px"/>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_centerVertical="true"
+    	android:layout_centerHorizontal="true"
+    	>
+        
     <EditText
         android:id="@+id/loginUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center" 
         android:focusable="true"
-        android:ems="10"
-        android:hint="@string/textfieldlabel_username"
-        android:inputType="text" />
+        android:hint="@string/hint_username"
+        android:inputType="text|textNoSuggestions" />
 
     <EditText
         android:id="@+id/loginPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/loginUsername"
         android:layout_below="@+id/loginUsername"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="@string/textfieldlabel_password"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" 
+        android:layout_marginTop="25dp"
+        android:hint="@string/hint_password"
         android:inputType="textWebPassword" />
     
       <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
+        android:background="@drawable/custom_button"
         android:text="@string/buttonlabel_login" />
  
+</RelativeLayout>
 
 </RelativeLayout>

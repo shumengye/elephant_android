@@ -6,13 +6,24 @@
         android:content="@+id/content"
         android:handle="@+id/handle" >
         
-        <TextView
+    <LinearLayout
         android:id="@+id/handle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/green1"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="@string/label_signuplink" />
+        android:paddingBottom="16dp" >
+        
+        <TextView
+            android:id="@+id/photoinfo"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:gravity="left"
+	        android:text="@string/label_signuplink" />
+        
+    </LinearLayout>
+        
 
         <RelativeLayout
             android:id="@+id/content"
@@ -39,7 +50,7 @@
 			        android:focusable="true"
 			        android:layout_weight="1"
 			        android:ems="10"
-			        android:hint="@string/textfieldlabel_username"
+			        android:hint="@string/hint_comment"
 			        android:inputType="text" />
                 
                 <Button

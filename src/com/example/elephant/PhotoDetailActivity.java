@@ -1,16 +1,23 @@
 package com.example.elephant;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +29,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 public class PhotoDetailActivity extends Activity {
 	private String photoId;
@@ -68,10 +76,26 @@ public class PhotoDetailActivity extends Activity {
 		return true;
 	} 
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        // Logout
+	        case R.id.logout:
+	        	ParseUser.logOut();
+	        	Intent loginIntent = new Intent(this, LoginActivity.class);
+	        	loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    		startActivity(loginIntent);	
+	    		finish();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
 	private void showPhoto(String objectId) {
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this);
-		loader.setMessage("Loading photo...");
+		loader.setMessage(getString(R.string.message_loadingphoto));
 		loader.setCancelable(false);
 		loader.setIndeterminate(true);
 		loader.show();

@@ -56,7 +56,7 @@ public class SignupFragment extends Fragment {
 	private void signupUser() {
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this.getActivity());
-		loader.setMessage("Signing up...");
+		loader.setMessage(getString(R.string.message_signup));
 		loader.setCancelable(false);
 		loader.setIndeterminate(true);
 		loader.show();
@@ -83,7 +83,7 @@ public class SignupFragment extends Fragment {
 	private void loginUser(String username, String password) {
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this.getActivity());
-		loader.setMessage("Logging in...");
+		loader.setMessage(getString(R.string.message_login));
 		loader.setCancelable(false);
 		loader.setIndeterminate(true);
 		loader.show();

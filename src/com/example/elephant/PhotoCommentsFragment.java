@@ -29,7 +29,7 @@ public class PhotoCommentsFragment extends ListFragment {
         view =  inflater.inflate(R.layout.fragment_comments, container, false);
         
         // Photo info summary
-        final TextView handle = (TextView) view.findViewById(R.id.handle);
+        final TextView handle = (TextView) view.findViewById(R.id.photoinfo);
         handle.setText(this.photoId);
         
         // Comments list, fetch comments from Parse

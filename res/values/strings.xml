@@ -10,13 +10,22 @@
     <string name="buttonlabel_login">Log in</string>
     <string name="buttonlabel_logout">Log out</string>
     <string name="buttonlabel_signup">Sign up</string>
+    <string name="buttonlabel_uploadphoto">Upload photo</string>
+    
+    <string name="message_loadingphoto">Loading photo&#8230;</string>
+    <string name="message_login">Logging in&#8230;</string>
+    <string name="message_signup">Signing up&#8230;</string>
+    <string name="message_uploadingphoto">Uploading photo&#8230;</string>
+    <string name="message_photo_question">Ask a question with your photo e.g. what is this?</string>
         
     <string name="label_signuplink">Sign up now</string>
     <string name="label_loginlink">Log in now</string>
 
-    <string name="textfieldlabel_username">Username</string>
-    <string name="textfieldlabel_password">Password</string>
-    <string name="label_photo_question">Add question to photo</string>
-    <string name="ok">Ok</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_comment"></string>
+    <string name="hint_photo_question">What is this?</string>
+    
+    <string name="ok">OK</string>
 
 </resources>
