@@ -1,5 +1,7 @@
 package com.example.elephant;
 
+import java.util.List;
+
 import android.app.ListFragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -12,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -31,7 +35,17 @@ public class PhotoCommentsFragment extends ListFragment {
         // Photo info summary
         showPhotoInfo();
         
-        mainAdapter = new CommentListAdapter(this.getActivity());
+        mainAdapter = new CommentListAdapter(this.getActivity(), new ParseQueryAdapter.QueryFactory<PhotoComment>() {
+			public ParseQuery<PhotoComment> create() {
+				ParseQuery<PhotoComment> query = new ParseQuery<PhotoComment>("PhotoComment");
+				query.orderByDescending("createdAt");
+				Photo photo = ParseObject.createWithoutData(Photo.class, photoId);
+				query.whereEqualTo("parent", photo);
+				return query;
+			}
+		});
+        
+        
 		mainAdapter.setTextKey("comment");
 		setListAdapter(mainAdapter);
 		
@@ -77,6 +91,7 @@ public class PhotoCommentsFragment extends ListFragment {
 		final TextView questionField = (TextView) view.findViewById(R.id.photoinfo_question);
 		final TextView senderField = (TextView) view.findViewById(R.id.photoinfo_user);
 		
+		// Show photo question and user name
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("UserPhoto");
 		query.whereEqualTo("objectId", photoId);
 		query.getFirstInBackground(new GetCallback<ParseObject>() {
@@ -85,12 +100,30 @@ public class PhotoCommentsFragment extends ListFragment {
 			public void done(ParseObject object, ParseException e) {
 				if (e == null) {
 					questionField.setText(capitalize(object.getString("question")));
-					senderField.setText(capitalize(object.getString("senderName")));
+					senderField.setText(capitalize(object.getString("senderName")));			
 				}
 				else
 					Log.d("Photo load error", e.toString());
 			}	  
 		});
+		
+		showNumberOfComments();
+	}
+	
+	private void showNumberOfComments() {
+
+		final TextView commentsNum = (TextView) view.findViewById(R.id.photoinfo_comments_num);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("PhotoComment");
+		Photo photo = ParseObject.createWithoutData(Photo.class, photoId);
+		query.whereEqualTo("parent", photo);
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null)
+				commentsNum.setText(String.valueOf(objects.size()));	
+			}		
+		});	
 	}
 	
 	private String capitalize(String line)
@@ -129,6 +162,7 @@ public class PhotoCommentsFragment extends ListFragment {
 				if (e == null) {
 					commentTextField.setText("");
 					refreshCommentList();
+					showNumberOfComments();
 				}
 				else
 					Log.d("Comment upload error", e.toString());

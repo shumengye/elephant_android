@@ -5,23 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseImageView;
-import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
 public class CommentListAdapter extends ParseQueryAdapter<PhotoComment> {
+
 	
-	public CommentListAdapter(Context context) {
-		super(context, new ParseQueryAdapter.QueryFactory<PhotoComment>() {
-			public ParseQuery<PhotoComment> create() {
-				ParseQuery<PhotoComment> query = new ParseQuery<PhotoComment>("PhotoComment");
-				query.orderByDescending("createdAt");
-				return query;
-			}
-		});
+	public CommentListAdapter(Context context, QueryFactory<PhotoComment> q) {
+		super(context, q);
 	}
 	
 	@Override
