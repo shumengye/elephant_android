@@ -9,6 +9,8 @@ public class RelativeDate {
 	private static SimpleDateFormat sdf = new SimpleDateFormat( "h:mm a MMM dd, yyyy" );
 	 
     /**
+     * Kurtis Chiappone
+     * 
      * This method computes the relative date according to
      * the Calendar being passed in and the number of years,
      * months, days, etc. that differ. This will compute both
@@ -44,6 +46,10 @@ public class RelativeDate {
         // Month
  
         else if ( months != 0 ) return date;
+        else if ( months == 1 ) return 1 + " month ago";
+        else if ( months == -1 ) return 1 + " month ago";
+        else if ( months > 0 ) return months + " months ago";
+        else if ( months < 0 ) return Math.abs( months ) + " months ago";
  
         // Day
  

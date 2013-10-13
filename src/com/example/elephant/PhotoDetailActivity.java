@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -52,7 +53,7 @@ public class PhotoDetailActivity extends Activity {
 					onTouchEvent(arg1);
     			    return true;
 				}
-	        }
+	        } 
 		);
 		
 		// Comments fragment	
@@ -143,37 +144,64 @@ public class PhotoDetailActivity extends Activity {
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		int action = MotionEventCompat.getActionMasked(ev); 
+		DisplayMetrics displaymetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+		int height = displaymetrics.heightPixels;
+		int width = displaymetrics.widthPixels;
+		//System.out.println("Screen "+width + ", " + height);
+		//System.out.println("New coordinates "+maskView.getX()+ ", " + maskView.getY());
+		// Boundaries for mask movement based on screen size
+		int minX = -1163;
+		int minY = -1843;
+		int maxX = -1200 + width -43;
+		int maxY = -1900 + height -380;
 		
 		switch (action) { 
-		case MotionEvent.ACTION_DOWN: {
+			case MotionEvent.ACTION_DOWN: {
 		        final float x = ev.getRawX();
 		        final float y  = ev.getRawY();
 		        
 		        // Remember current touch position
 		        mLastTouchX = x;
 		        mLastTouchY = y;
-		            
+		        
 		        break;
 		    }
 		
 			case MotionEvent.ACTION_MOVE: {
 		        final float x = ev.getRawX();
 		        final float y  = ev.getRawY();
-		        
-		        
+		        		        
 		        // Calculate the distance moved
 		        final float dx = x - mLastTouchX;
 		        final float dy = y - mLastTouchY;
 		        
+		        // Check boundaries
+		        float newX = maskView.getX() + dx;
+		        float newY = maskView.getY() + dy;
+		        
+		        
+		        if (newX < minX)
+		        	newX = minX;
+		        if (newX > maxX)
+		        	newX = maxX;
+
+		        
+		        if (newY < minY)
+		        	newY = minY;
+		        if (newY > maxY)
+		        	newY = maxY;
+		   
 		        // Update mask position
-		        maskView.setX(maskView.getX() + dx);
-		        maskView.setY(maskView.getY() + dy);
+		        maskView.setX(newX);
+		        maskView.setY(newY);
 		        
 		        // Remember current touch position
 		        mLastTouchX = x;
 		        mLastTouchY = y;
 		        break;
 	    	}
+			
 		}
 		return false;
 	}
