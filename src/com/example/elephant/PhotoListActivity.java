@@ -32,8 +32,6 @@ public class PhotoListActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//Drawable bg = getResources().getDrawable(R.drawable.blur);
-		//getListView().setBackground(bg);
 		getListView().setDividerHeight(0);
 		getListView().setDivider(null);
 		

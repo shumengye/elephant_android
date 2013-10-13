@@ -21,7 +21,7 @@ public class PhotoComment extends ParseObject {
 	}
 	
 	public String getComment() {
-		return getString("comment");
+		return capitalize(getString("comment"));
 	}
 
 	public void setComment(String comment) {
@@ -29,7 +29,7 @@ public class PhotoComment extends ParseObject {
 	}
 	
 	public String getUserName() {
-		return getString("username");
+		return capitalize(getString("username"));
 	}
 
 	public void setUserName(String name) {
@@ -43,6 +43,11 @@ public class PhotoComment extends ParseObject {
 	public void setParent(Photo parent) {
 		ParseRelation<Photo> relation = this.getRelation("parent");
     	relation.add(parent);
+	}
+	
+	private String capitalize(String line)
+	{
+	  return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
 	
 }

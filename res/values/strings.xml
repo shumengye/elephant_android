@@ -23,9 +23,11 @@
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
-    <string name="hint_comment"></string>
+    <string name="hint_comment">Write comment</string>
     <string name="hint_photo_question">What is this?</string>
     
     <string name="ok">OK</string>
+    
+    <string name="default_description"></string>
 
 </resources>

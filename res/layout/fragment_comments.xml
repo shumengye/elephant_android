@@ -5,22 +5,48 @@
         android:layout_height="match_parent"
         android:content="@+id/content"
         android:handle="@+id/handle" >
-        
+    
+    <!-- Summary of photo, handle for slide drawer -->
     <LinearLayout
         android:id="@+id/handle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green1"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp" >
+        android:background="@color/blue2"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp" 
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:baselineAligned="false" >
         
-        <TextView
-            android:id="@+id/photoinfo"
-	        android:layout_width="0dip"
+        <RelativeLayout 
+            android:layout_width="0dip"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
+	        android:layout_weight="1">
+	        
+            <TextView
+            android:id="@+id/photoinfo_question"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
 	        android:gravity="left"
-	        android:text="@string/label_signuplink" />
+	        android:text="" />
+            
+            <TextView
+            android:id="@+id/photoinfo_user"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/photoinfo_question"
+	        android:gravity="left"
+	        android:textColor="@color/lightblue"
+	        android:text="" />
+            
+        </RelativeLayout>
+        
+        <ImageView 
+                android:id="@+id/photoinfo_arrow"
+                android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+	        	android:contentDescription="@string/default_description"
+                android:src="@drawable/arrow_down" />
         
     </LinearLayout>
         
@@ -31,17 +57,24 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
             
+            <!-- List of existing comments -->
             <ListView android:id="@id/android:list"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               android:background="#00FF00"
+               android:background="@color/lightgrey"
                android:layout_alignParentTop="true"
                android:drawSelectorOnTop="false" />
             
+            <!-- Add comment field -->
         	<LinearLayout 
         	    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
-			     android:layout_alignParentBottom="true">
+			    android:layout_alignParentBottom="true"
+			    android:background="@color/blue1"
+			    android:paddingLeft="30dp"
+		        android:paddingRight="30dp" 
+		        android:paddingTop="10dp"
+		        android:paddingBottom="10dp">
 			    
                 <EditText
 			        android:id="@+id/newComment"
@@ -49,16 +82,20 @@
 			        android:layout_height="wrap_content"
 			        android:focusable="true"
 			        android:layout_weight="1"
-			        android:ems="10"
+			        android:textColorHint="@color/white"
 			        android:hint="@string/hint_comment"
 			        android:inputType="text" />
                 
-                <Button
+                <ImageView
                     android:id="@+id/newCommentButton"
-			        android:layout_width="100dp"
+			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:layout_gravity="right"
-			        android:text="@string/ok" />
+			        android:layout_marginLeft="8dp"
+			        android:layout_marginTop="2dp"
+			        android:background="@drawable/ic_action_reply"
+			        android:contentDescription="@string/default_description"
+                     />
+               
                 
             </LinearLayout>	    
             

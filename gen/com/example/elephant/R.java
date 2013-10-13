@@ -11,12 +11,15 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int blue1=0x7f040004;
-        public static final int blue2=0x7f040005;
-        public static final int green1=0x7f040006;
-        public static final int green2=0x7f040007;
-        public static final int lightblue=0x7f040003;
+        public static final int blue1=0x7f040007;
+        public static final int blue2=0x7f040008;
+        public static final int green1=0x7f040009;
+        public static final int green2=0x7f04000a;
+        public static final int grey=0x7f040004;
+        public static final int grey2=0x7f040005;
+        public static final int lightblue=0x7f040006;
         public static final int lightgrey=0x7f040002;
+        public static final int lightgrey2=0x7f040003;
         public static final int pressed_example=0x7f040000;
         public static final int white=0x7f040001;
     }
@@ -32,50 +35,60 @@ public final class R {
     }
     public static final class drawable {
         public static final int application_icon=0x7f020000;
-        public static final int circlemask=0x7f020001;
-        public static final int custom_button=0x7f020002;
-        public static final int custom_button_green=0x7f020003;
-        public static final int ic_action_camera=0x7f020004;
-        public static final int ic_action_refresh=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int mask=0x7f020007;
+        public static final int arrow_down=0x7f020001;
+        public static final int arrow_up=0x7f020002;
+        public static final int circlemask=0x7f020003;
+        public static final int custom_button=0x7f020004;
+        public static final int custom_button_green=0x7f020005;
+        public static final int ic_action_camera=0x7f020006;
+        public static final int ic_action_new=0x7f020007;
+        public static final int ic_action_refresh=0x7f020008;
+        public static final int ic_action_reply=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int mask=0x7f02000b;
     }
     public static final class id {
         public static final int FrameLayout1=0x7f090000;
-        public static final int content=0x7f09000b;
+        public static final int comment=0x7f090007;
+        public static final int content=0x7f09000e;
+        public static final int date=0x7f090009;
         public static final int fragmentLayout=0x7f090003;
-        public static final int goToSignup=0x7f090016;
-        public static final int handle=0x7f09000c;
-        public static final int icon=0x7f090007;
+        public static final int goToSignup=0x7f09001b;
+        public static final int handle=0x7f09000f;
+        public static final int icon=0x7f09000a;
         public static final int imageMask=0x7f090002;
         public static final int imagePreview=0x7f090004;
         public static final int imageView1=0x7f090001;
-        public static final int loginButton=0x7f090012;
-        public static final int loginPassword=0x7f090011;
-        public static final int loginUsername=0x7f090010;
-        public static final int logout=0x7f090019;
-        public static final int newComment=0x7f09000e;
-        public static final int newCommentButton=0x7f09000f;
+        public static final int loginButton=0x7f090017;
+        public static final int loginPassword=0x7f090016;
+        public static final int loginUsername=0x7f090015;
+        public static final int logout=0x7f09001e;
+        public static final int newComment=0x7f090013;
+        public static final int newCommentButton=0x7f090014;
         public static final int newPhotoButton=0x7f090006;
-        public static final int new_photo=0x7f090017;
+        public static final int new_photo=0x7f09001c;
         public static final int photoQuestion=0x7f090005;
-        public static final int photoinfo=0x7f09000d;
-        public static final int question=0x7f090008;
-        public static final int refresh=0x7f090018;
-        public static final int senderName=0x7f090009;
-        public static final int signupButton=0x7f090015;
-        public static final int signupPassword=0x7f090014;
-        public static final int signupUsername=0x7f090013;
-        public static final int slidingDrawer1=0x7f09000a;
+        public static final int photoinfo_arrow=0x7f090012;
+        public static final int photoinfo_question=0x7f090010;
+        public static final int photoinfo_user=0x7f090011;
+        public static final int question=0x7f09000b;
+        public static final int refresh=0x7f09001d;
+        public static final int senderName=0x7f09000c;
+        public static final int signupButton=0x7f09001a;
+        public static final int signupPassword=0x7f090019;
+        public static final int signupUsername=0x7f090018;
+        public static final int slidingDrawer1=0x7f09000d;
+        public static final int userName=0x7f090008;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
         public static final int activity_login=0x7f030001;
         public static final int activity_new_photo=0x7f030002;
-        public static final int adapter_item=0x7f030003;
-        public static final int fragment_comments=0x7f030004;
-        public static final int fragment_login=0x7f030005;
-        public static final int fragment_signup=0x7f030006;
+        public static final int adapter_comment_item=0x7f030003;
+        public static final int adapter_photo_item=0x7f030004;
+        public static final int fragment_comments=0x7f030005;
+        public static final int fragment_login=0x7f030006;
+        public static final int fragment_signup=0x7f030007;
     }
     public static final class menu {
         public static final int login=0x7f080000;
@@ -91,6 +104,7 @@ public final class R {
         public static final int buttonlabel_refresh=0x7f060004;
         public static final int buttonlabel_signup=0x7f060007;
         public static final int buttonlabel_uploadphoto=0x7f060008;
+        public static final int default_description=0x7f060015;
         public static final int hello_world=0x7f060002;
         public static final int hint_comment=0x7f060012;
         public static final int hint_password=0x7f060011;

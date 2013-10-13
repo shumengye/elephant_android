@@ -21,7 +21,7 @@ public class Photo extends ParseObject {
 	}
 	
 	public String getSenderName() {
-		return getString("senderName");
+		return capitalize(getString("senderName"));
 	}
 	
 	public void setSenderName(String n) {
@@ -29,7 +29,7 @@ public class Photo extends ParseObject {
 	}
 	
 	public String getQuestion() {
-		return getString("question");
+		return capitalize(getString("question"));
 	}
 	
 	public void setQuestion(String q) {
@@ -50,6 +50,11 @@ public class Photo extends ParseObject {
 	
 	public void setImageFile(ParseFile f) {
 		put("imageFile", f);
+	}
+	
+	private String capitalize(String line)
+	{
+	  return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
 
 }

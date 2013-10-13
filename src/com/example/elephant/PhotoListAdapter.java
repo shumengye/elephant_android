@@ -28,7 +28,7 @@ public class PhotoListAdapter extends ParseQueryAdapter<Photo> {
 	@Override
 	public View getItemView(Photo photo, View v, ViewGroup parent) {
 		if (v == null) {
-		    v = View.inflate(getContext(), R.layout.adapter_item, null);
+		    v = View.inflate(getContext(), R.layout.adapter_photo_item, null);
 		}
     
 		super.getItemView(photo, v, parent);
@@ -53,6 +53,10 @@ public class PhotoListAdapter extends ParseQueryAdapter<Photo> {
 		// Sender name
 		TextView descriptionView = (TextView) v.findViewById(R.id.senderName);
 		descriptionView.setText(photo.getSenderName());
+		
+		// Date
+		TextView dateView = (TextView) v.findViewById(R.id.date);
+		dateView.setText(photo.getCreatedAt().toString());
 		
 		return v;
 	}

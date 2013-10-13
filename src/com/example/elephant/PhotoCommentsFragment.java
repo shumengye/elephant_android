@@ -7,32 +7,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseQueryAdapter;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class PhotoCommentsFragment extends ListFragment {
 	private View view;
 	private String photoId;
-	private ParseQueryAdapter<PhotoComment> mainAdapter;
+	private CommentListAdapter mainAdapter;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_comments, container, false);
         
         // Photo info summary
-        final TextView handle = (TextView) view.findViewById(R.id.photoinfo);
-        handle.setText(this.photoId);
+        showPhotoInfo();
         
         // Comments list, fetch comments from Parse
+        /*
         mainAdapter = new ParseQueryAdapter<PhotoComment>(this.getActivity(), new ParseQueryAdapter.QueryFactory<PhotoComment>() {
             public ParseQuery<PhotoComment> create() {
                 // Reference to parent photo
@@ -45,12 +44,14 @@ public class PhotoCommentsFragment extends ListFragment {
                 return query;
               }
             });
+            */
         
+        mainAdapter = new CommentListAdapter(this.getActivity());
 		mainAdapter.setTextKey("comment");
 		setListAdapter(mainAdapter);
 		
 		// Submit button for new comment
-	    final Button commentButton = (Button) view.findViewById(R.id.newCommentButton);
+	    final ImageView commentButton = (ImageView) view.findViewById(R.id.newCommentButton);
 	    commentButton.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
 	    		newComment();
@@ -67,6 +68,31 @@ public class PhotoCommentsFragment extends ListFragment {
 	public void refreshCommentList() {
 		mainAdapter.loadObjects();
 		setListAdapter(mainAdapter);
+	}
+	
+	private void showPhotoInfo() {
+		final TextView questionField = (TextView) view.findViewById(R.id.photoinfo_question);
+		final TextView senderField = (TextView) view.findViewById(R.id.photoinfo_user);
+		
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("UserPhoto");
+		query.whereEqualTo("objectId", photoId);
+		query.getFirstInBackground(new GetCallback<ParseObject>() {
+
+			@Override
+			public void done(ParseObject object, ParseException e) {
+				if (e == null) {
+					questionField.setText(capitalize(object.getString("question")));
+					senderField.setText(capitalize(object.getString("senderName")));
+				}
+				else
+					Log.d("Photo load error", e.toString());
+			}	  
+		});
+	}
+	
+	private String capitalize(String line)
+	{
+	  return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
 	
 	private void newComment() {
