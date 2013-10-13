@@ -173,7 +173,7 @@ public class PhotoCommentsFragment extends ListFragment {
 	
 	private void drawerOpened() {
 		final ImageView icon = (ImageView) view.findViewById(R.id.photoinfo_arrow);
-		icon.setImageResource(R.drawable.ic_action_cancel);
+		icon.setImageResource(R.drawable.ic_action_collapse);
 	}
 	
 	private void drawerClosed() {

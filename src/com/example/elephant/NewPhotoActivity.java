@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -85,6 +87,11 @@ public class NewPhotoActivity extends Activity {
 					}
 				}
 		);
+		
+		// Show toast with instructions for moving mask
+		Toast toast = Toast.makeText(this, R.string.toast_mask_preview, Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 250);
+		toast.show();
 	}
 	
 	@Override
@@ -158,8 +165,8 @@ public class NewPhotoActivity extends Activity {
 		Photo photo = new Photo();
 		
 		String question = ((EditText) findViewById(R.id.photoQuestion)).getText().toString();
-		if (question.length() == 0)
-			question = getString(R.string.hint_photo_question);
+		//if (question.length() == 0)
+		//question = getString(R.string.hint_photo_question);
         photo.setQuestion(question);
         
         ParseUser currentUser = ParseUser.getCurrentUser();

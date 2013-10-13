@@ -36,14 +36,14 @@ public final class R {
     public static final class drawable {
         public static final int application_icon=0x7f020000;
         public static final int arrow_down=0x7f020001;
-        public static final int arrow_up=0x7f020002;
-        public static final int circle_bg=0x7f020003;
-        public static final int circlemask=0x7f020004;
-        public static final int custom_button=0x7f020005;
-        public static final int custom_button_green=0x7f020006;
-        public static final int ic_action_camera=0x7f020007;
-        public static final int ic_action_cancel=0x7f020008;
-        public static final int ic_action_chat=0x7f020009;
+        public static final int circle_bg=0x7f020002;
+        public static final int circlemask=0x7f020003;
+        public static final int custom_button=0x7f020004;
+        public static final int custom_button_green=0x7f020005;
+        public static final int ic_action_camera=0x7f020006;
+        public static final int ic_action_cancel=0x7f020007;
+        public static final int ic_action_chat=0x7f020008;
+        public static final int ic_action_collapse=0x7f020009;
         public static final int ic_action_new=0x7f02000a;
         public static final int ic_action_refresh=0x7f02000b;
         public static final int ic_action_reply=0x7f02000c;
@@ -110,7 +110,7 @@ public final class R {
         public static final int buttonlabel_refresh=0x7f060004;
         public static final int buttonlabel_signup=0x7f060007;
         public static final int buttonlabel_uploadphoto=0x7f060008;
-        public static final int default_description=0x7f060015;
+        public static final int default_description=0x7f060017;
         public static final int hello_world=0x7f060002;
         public static final int hint_comment=0x7f060012;
         public static final int hint_password=0x7f060011;
@@ -123,7 +123,9 @@ public final class R {
         public static final int message_photo_question=0x7f06000d;
         public static final int message_signup=0x7f06000b;
         public static final int message_uploadingphoto=0x7f06000c;
-        public static final int ok=0x7f060014;
+        public static final int ok=0x7f060016;
+        public static final int toast_mask=0x7f060014;
+        public static final int toast_mask_preview=0x7f060015;
     }
     public static final class style {
         /** 

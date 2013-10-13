@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.GetDataCallback;
@@ -92,6 +95,8 @@ public class PhotoDetailActivity extends Activity {
 		loader.setCancelable(false);
 		loader.setIndeterminate(true);
 		loader.show();
+		
+		final Context context = getApplicationContext();
 				
 		// Get Parse photo object
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("UserPhoto");
@@ -114,6 +119,11 @@ public class PhotoDetailActivity extends Activity {
 								final ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 								Bitmap bmp = BitmapFactory.decodeByteArray(data,0,data.length);
 								imageView.setImageBitmap(bmp);
+								
+								// Show toast with instructions for moving mask
+								Toast toast = Toast.makeText(context, R.string.toast_mask, Toast.LENGTH_LONG);
+								toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 250);
+								toast.show();
 							}
 							else
 								Log.d("Image file load error", e.toString());
