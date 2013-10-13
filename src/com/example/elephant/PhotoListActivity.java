@@ -34,6 +34,7 @@ public class PhotoListActivity extends ListActivity {
 
 		getListView().setDividerHeight(0);
 		getListView().setDivider(null);
+		//getListView().setBackgroundResource(R.color.lightgrey);
 		
 		mainAdapter = new PhotoListAdapter(this);
 		mainAdapter.setTextKey("question");

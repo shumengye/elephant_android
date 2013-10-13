@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SlidingDrawer;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
@@ -30,22 +31,6 @@ public class PhotoCommentsFragment extends ListFragment {
         // Photo info summary
         showPhotoInfo();
         
-        // Comments list, fetch comments from Parse
-        /*
-        mainAdapter = new ParseQueryAdapter<PhotoComment>(this.getActivity(), new ParseQueryAdapter.QueryFactory<PhotoComment>() {
-            public ParseQuery<PhotoComment> create() {
-                // Reference to parent photo
-            	Photo parent = new Photo();
-            	parent.setObjectId(photoId);
-            	
-                ParseQuery<PhotoComment> query = new ParseQuery<PhotoComment>("PhotoComment");
-                query.whereEqualTo("parent", parent);
-                query.orderByDescending("createdAt");
-                return query;
-              }
-            });
-            */
-        
         mainAdapter = new CommentListAdapter(this.getActivity());
 		mainAdapter.setTextKey("comment");
 		setListAdapter(mainAdapter);
@@ -57,7 +42,25 @@ public class PhotoCommentsFragment extends ListFragment {
 	    		newComment();
 	        }
 	    });
-        
+	    
+	    //Sliding drawer
+	    SlidingDrawer s = (SlidingDrawer) view.findViewById(R.id.slidingDrawer1);
+	    s.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener() {
+			
+			@Override
+			public void onDrawerOpened() {
+				drawerOpened();				
+			}
+		});
+	    
+	   s.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+		@Override
+		public void onDrawerClosed() {
+			drawerClosed();	
+			
+		}
+	   });
+	  
 	    return view;    
     }
 	
@@ -132,6 +135,16 @@ public class PhotoCommentsFragment extends ListFragment {
 			}
         	
         });
+	}
+	
+	private void drawerOpened() {
+		final ImageView icon = (ImageView) view.findViewById(R.id.photoinfo_arrow);
+		icon.setImageResource(R.drawable.ic_action_cancel);
+	}
+	
+	private void drawerClosed() {
+		final ImageView icon = (ImageView) view.findViewById(R.id.photoinfo_arrow);
+		icon.setImageResource(R.drawable.arrow_down);
 	}
 	
 }

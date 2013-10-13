@@ -3,6 +3,7 @@ package com.example.elephant;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +49,10 @@ public class LoginFragment extends Fragment {
 	    		loginUser();
 	        }
 	    });
+	    
+	    // Fix for password field font issue
+	    final EditText p = (EditText) view.findViewById(R.id.loginPassword);
+	    p.setTypeface(Typeface.SANS_SERIF);
 	    
 	    return view;    
     }

@@ -1,5 +1,11 @@
 package com.example.elephant;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +60,11 @@ public class PhotoListAdapter extends ParseQueryAdapter<Photo> {
 		TextView descriptionView = (TextView) v.findViewById(R.id.senderName);
 		descriptionView.setText(photo.getSenderName());
 		
-		// Date
-		TextView dateView = (TextView) v.findViewById(R.id.date);
-		dateView.setText(photo.getCreatedAt().toString());
+		// Date, convert date to relative time e.g. "1 day ago"
+		Calendar c = GregorianCalendar.getInstance();
+        c.setTime(photo.getCreatedAt());
+        TextView dateView = (TextView) v.findViewById(R.id.date);
+		dateView.setText(RelativeDate.getRelativeDate(c));
 		
 		return v;
 	}
