@@ -13,18 +13,30 @@
     	android:layout_centerVertical="true"
     	android:layout_centerHorizontal="true"
     	>
+    	
+   <TextView
+       android:id="@+id/welcome"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="0dp"
+       android:text="@string/label_welcome"
+       android:gravity="center"
+       android:textSize="28sp" />
         
     <EditText
         android:id="@+id/loginUsername"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
+        android:layout_below="@+id/welcome"
+        android:layout_marginTop="32dp"
         android:focusable="true"
         android:gravity="center"
         android:hint="@string/hint_username"
         android:inputType="text|textNoSuggestions"
+        android:textColor="@color/lightgrey2"
         android:typeface="sans" />
 
     <EditText

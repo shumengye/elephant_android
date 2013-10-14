@@ -148,8 +148,7 @@ public class PhotoDetailActivity extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 		int height = displaymetrics.heightPixels;
 		int width = displaymetrics.widthPixels;
-		//System.out.println("Screen "+width + ", " + height);
-		//System.out.println("New coordinates "+maskView.getX()+ ", " + maskView.getY());
+		
 		// Boundaries for mask movement based on screen size
 		int minX = -1163;
 		int minY = -1843;

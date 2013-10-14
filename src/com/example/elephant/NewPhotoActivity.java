@@ -20,6 +20,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -119,37 +120,63 @@ public class NewPhotoActivity extends Activity {
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		int action = MotionEventCompat.getActionMasked(ev); 
+		DisplayMetrics displaymetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+		int height = displaymetrics.heightPixels;
+		int width = displaymetrics.widthPixels;
+		
+		// Boundaries for mask movement based on screen size
+		int minX = -1163;
+		int minY = -1843;
+		int maxX = -1200 + width -43;
+		int maxY = -1900 + height -250;
 		
 		switch (action) { 
-		case MotionEvent.ACTION_DOWN: {
+			case MotionEvent.ACTION_DOWN: {
 		        final float x = ev.getRawX();
 		        final float y  = ev.getRawY();
 		        
 		        // Remember current touch position
 		        mLastTouchX = x;
 		        mLastTouchY = y;
-		            
+		        
 		        break;
 		    }
 		
 			case MotionEvent.ACTION_MOVE: {
 		        final float x = ev.getRawX();
 		        final float y  = ev.getRawY();
-		        
-		        
+		        		        
 		        // Calculate the distance moved
 		        final float dx = x - mLastTouchX;
 		        final float dy = y - mLastTouchY;
 		        
+		        // Check boundaries
+		        float newX = maskView.getX() + dx;
+		        float newY = maskView.getY() + dy;
+		        
+		        
+		        if (newX < minX)
+		        	newX = minX;
+		        if (newX > maxX)
+		        	newX = maxX;
+
+		        
+		        if (newY < minY)
+		        	newY = minY;
+		        if (newY > maxY)
+		        	newY = maxY;
+		   
 		        // Update mask position
-		        maskView.setX(maskView.getX() + dx);
-		        maskView.setY(maskView.getY() + dy);
+		        maskView.setX(newX);
+		        maskView.setY(newY);
 		        
 		        // Remember current touch position
 		        mLastTouchX = x;
 		        mLastTouchY = y;
 		        break;
 	    	}
+			
 		}
 		return false;
 	}
@@ -165,8 +192,6 @@ public class NewPhotoActivity extends Activity {
 		Photo photo = new Photo();
 		
 		String question = ((EditText) findViewById(R.id.photoQuestion)).getText().toString();
-		//if (question.length() == 0)
-		//question = getString(R.string.hint_photo_question);
         photo.setQuestion(question);
         
         ParseUser currentUser = ParseUser.getCurrentUser();

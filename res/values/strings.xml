@@ -10,7 +10,7 @@
     <string name="buttonlabel_login">Log in</string>
     <string name="buttonlabel_logout">Log out</string>
     <string name="buttonlabel_signup">Sign up</string>
-    <string name="buttonlabel_uploadphoto">Upload photo</string>
+    <string name="buttonlabel_uploadphoto">Send photo</string>
     
     <string name="message_loadingphoto">Loading photo&#8230;</string>
     <string name="message_login">Logging in&#8230;</string>
@@ -20,6 +20,8 @@
         
     <string name="label_signuplink">Sign up now</string>
     <string name="label_loginlink">Log in now</string>
+    <string name="label_welcome">Log in to Elephant</string>
+    <string name="label_welcome_signup">Sign up for Elephant</string>    
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
@@ -31,5 +33,5 @@
     
     <string name="ok">OK</string>
     <string name="default_description"></string>
-
+    
 </resources>

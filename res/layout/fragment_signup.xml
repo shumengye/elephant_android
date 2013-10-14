@@ -12,16 +12,28 @@
         android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
     	android:layout_centerVertical="true"
-    	android:layout_centerHorizontal="true"
-    	>
+    	android:layout_centerHorizontal="true">
+    	
+        
+       <TextView
+       android:id="@+id/welcomeSignup"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentTop="true"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="0dp"
+       android:text="@string/label_welcome_signup"
+       android:gravity="center"
+       android:textSize="28sp" />
     	
     <!-- Username field -->
     <EditText
         android:id="@+id/signupUsername"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/welcomeSignup"
+        android:layout_marginTop="32dp"
         android:gravity="center" 
         android:focusable="true"
         android:typeface="sans"
