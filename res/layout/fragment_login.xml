@@ -14,53 +14,62 @@
     	android:layout_centerHorizontal="true"
     	>
     	
-   <TextView
-       android:id="@+id/welcome"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignParentTop="true"
-       android:layout_centerHorizontal="true"
-       android:layout_marginTop="0dp"
-       android:text="@string/label_welcome"
-       android:gravity="center"
-       android:textSize="28sp" />
-        
-    <EditText
-        android:id="@+id/loginUsername"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/welcome"
-        android:layout_marginTop="32dp"
-        android:focusable="true"
-        android:gravity="center"
-        android:hint="@string/hint_username"
-        android:inputType="text|textNoSuggestions"
-        android:textColor="@color/lightgrey2"
-        android:typeface="sans" />
-
-    <EditText
-        android:id="@+id/loginPassword"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/loginUsername"
-        android:layout_below="@+id/loginUsername"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:gravity="center"
-        android:hint="@string/hint_password"
-        android:inputType="textWebPassword"
-        android:typeface="sans" />
-    
-      <Button
-        android:id="@+id/loginButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/loginPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/custom_button"
-        android:text="@string/buttonlabel_login" />
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/default_description"
+            android:src="@drawable/elephant" />
+    	
+	   <TextView
+	       android:id="@+id/welcome"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_centerHorizontal="true"
+	       android:layout_below="@+id/logo"
+	       android:layout_marginTop="8dp"
+	       android:text="@string/label_welcome"
+	       android:gravity="center"
+	       android:textSize="28sp" />
+	        
+	    <EditText
+	        android:id="@+id/loginUsername"
+	        android:layout_width="240dp"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_below="@+id/welcome"
+	        android:layout_marginTop="32dp"
+	        android:focusable="true"
+	        android:gravity="center"
+	        android:hint="@string/hint_username"
+	        android:inputType="text|textNoSuggestions"
+	        android:textColor="@color/lightgrey2"
+	        android:typeface="sans" />
+	
+	    <EditText
+	        android:id="@+id/loginPassword"
+	        android:layout_width="240dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/loginUsername"
+	        android:layout_below="@+id/loginUsername"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="18dp"
+	        android:gravity="center"
+	        android:hint="@string/hint_password"
+	        android:inputType="textWebPassword"
+	        android:typeface="sans" />
+	    
+	      <Button
+	        android:id="@+id/loginButton"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/loginPassword"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="36dp"
+	        android:background="@drawable/custom_button"
+	        android:text="@string/buttonlabel_login" />
  
 </RelativeLayout>
 
