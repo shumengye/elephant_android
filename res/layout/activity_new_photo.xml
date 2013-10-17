@@ -48,7 +48,6 @@
 	            android:gravity="center"
 	            android:layout_marginTop="20dp"
 	            android:hint="@string/message_photo_question"
-	            android:textColorHint="@color/lightblue"
 	            android:inputType="text|textNoSuggestions" >
 	        </EditText>
 	
@@ -59,7 +58,7 @@
 	            android:layout_below="@+id/photoQuestion"
 	            android:layout_centerHorizontal="true"
 	            android:layout_marginTop="30dp"
-	            android:background="@drawable/custom_button_green"
+	            android:background="@drawable/custom_button"
 	            android:text="@string/buttonlabel_uploadphoto" />
    
     </RelativeLayout>

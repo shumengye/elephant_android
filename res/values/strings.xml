@@ -20,7 +20,7 @@
         
     <string name="label_signuplink">Sign up now</string>
     <string name="label_loginlink">Log in now</string>
-    <string name="label_welcome">Log in to Elephant</string>
+    <string name="label_welcome">Welcome to Elephant</string>
     <string name="label_welcome_signup">Sign up for Elephant</string>    
 
     <string name="hint_username">Username</string>

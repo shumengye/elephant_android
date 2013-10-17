@@ -9,15 +9,24 @@
     <color name="grey2">#94999c</color>     
     
     <color name="lightblue">#7ad0f1</color>
-    <color name="blue1">#00aeef</color>
-    <color name="blue2">#0099d3</color>
+    <color name="blue1">#0388cd</color>
+    <color name="blue2">#0388cd</color>
     <color name="green1">#99CC00</color>
     <color name="green2">#669900</color>
     
+    
     <style name="Elephant" parent="android:Theme.Holo">
         <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="android:textSize">18sp</item>    
        <item name="android:actionMenuTextAppearance">@android:style/Widget.Holo.Light.ActionBar</item>
+       <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@color/blue1</item>
     </style>
  
 
