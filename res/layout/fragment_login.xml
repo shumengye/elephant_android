@@ -17,8 +17,8 @@
     	
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/default_description"
@@ -30,7 +30,7 @@
 	       android:layout_height="wrap_content"
 	       android:layout_centerHorizontal="true"
 	       android:layout_below="@+id/logo"
-	       android:layout_marginTop="8dp"
+	       android:layout_marginTop="0dp"
 	       android:text="@string/label_welcome"
 	       android:gravity="center"
 	       android:textSize="26sp" />
@@ -41,7 +41,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
 	        android:layout_below="@+id/welcome"
-	        android:layout_marginTop="32dp"
+	        android:layout_marginTop="16dp"
 	        android:focusable="true"
 	        android:gravity="center"
 	        android:hint="@string/hint_username"
@@ -55,7 +55,7 @@
 	        android:layout_alignLeft="@+id/loginUsername"
 	        android:layout_below="@+id/loginUsername"
 	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="18dp"
+	        android:layout_marginTop="9dp"
 	        android:gravity="center"
 	        android:hint="@string/hint_password"
 	        android:inputType="textWebPassword"
@@ -67,7 +67,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/loginPassword"
 	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="26dp"
+	        android:layout_marginTop="13dp"
 	        android:background="@drawable/custom_button"
 	        android:text="@string/buttonlabel_login" />
 	      
@@ -78,7 +78,7 @@
 	          android:layout_height="wrap_content"
 	          android:layout_below="@+id/loginButton"
 	          android:layout_centerHorizontal="true"
-	          android:layout_marginTop="18dp"
+	          android:layout_marginTop="9dp"
 	          android:gravity="center"
 	          android:textSize="15sp" />
  
