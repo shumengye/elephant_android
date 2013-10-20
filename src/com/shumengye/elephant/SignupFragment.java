@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-import com.shumengye.elephant.R;
 
 public class SignupFragment extends Fragment {
 	
@@ -81,10 +79,12 @@ public class SignupFragment extends Fragment {
 		loader.show();
 				
 		final String username = ((EditText) view.findViewById(R.id.signupUsername)).getText().toString();
+		final String email = ((EditText) view.findViewById(R.id.signupEmail)).getText().toString();		
 		final String password = ((EditText) view.findViewById(R.id.signupPassword)).getText().toString();
 		
 		ParseUser user = new ParseUser();
 		user.setUsername(username);
+		user.setEmail(email);
 		user.setPassword(password);
 		
 		user.signUpInBackground(new SignUpCallback() {

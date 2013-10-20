@@ -63,9 +63,11 @@ public final class R {
         public static final int content=0x7f090010;
         public static final int date=0x7f09000c;
         public static final int divider=0x7f09000e;
-        public static final int error=0x7f09001e;
+        public static final int email=0x7f090020;
+        public static final int error=0x7f09001f;
         public static final int fragmentLayout=0x7f090003;
-        public static final int goToSignup=0x7f090023;
+        public static final int goToForgotPassword=0x7f09001e;
+        public static final int goToSignup=0x7f090028;
         public static final int handle=0x7f090011;
         public static final int icon=0x7f090009;
         public static final int iconContainer=0x7f09000d;
@@ -76,11 +78,12 @@ public final class R {
         public static final int loginPassword=0x7f09001c;
         public static final int loginUsername=0x7f09001b;
         public static final int logo=0x7f090019;
-        public static final int logout=0x7f090026;
+        public static final int logout=0x7f09002b;
+        public static final int msg=0x7f090022;
         public static final int newComment=0x7f090017;
         public static final int newCommentButton=0x7f090018;
         public static final int newPhotoButton=0x7f090006;
-        public static final int new_photo=0x7f090024;
+        public static final int new_photo=0x7f090029;
         public static final int photoQuestion=0x7f090005;
         public static final int photoinfo_arrow=0x7f090016;
         public static final int photoinfo_chat=0x7f090012;
@@ -88,15 +91,17 @@ public final class R {
         public static final int photoinfo_question=0x7f090014;
         public static final int photoinfo_user=0x7f090015;
         public static final int question=0x7f09000a;
-        public static final int refresh=0x7f090025;
+        public static final int refresh=0x7f09002a;
+        public static final int resetPasswordButton=0x7f090021;
         public static final int senderName=0x7f09000b;
-        public static final int signupButton=0x7f090022;
-        public static final int signupPassword=0x7f090021;
-        public static final int signupUsername=0x7f090020;
+        public static final int signupButton=0x7f090027;
+        public static final int signupEmail=0x7f090025;
+        public static final int signupPassword=0x7f090026;
+        public static final int signupUsername=0x7f090024;
         public static final int slidingDrawer1=0x7f09000f;
         public static final int userName=0x7f090008;
         public static final int welcome=0x7f09001a;
-        public static final int welcomeSignup=0x7f09001f;
+        public static final int welcomeSignup=0x7f090023;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;
@@ -108,7 +113,8 @@ public final class R {
         public static final int adapter_photo_item=0x7f030006;
         public static final int fragment_comments=0x7f030007;
         public static final int fragment_login=0x7f030008;
-        public static final int fragment_signup=0x7f030009;
+        public static final int fragment_reset_password=0x7f030009;
+        public static final int fragment_signup=0x7f03000a;
     }
     public static final class menu {
         public static final int login=0x7f080000;
@@ -122,26 +128,32 @@ public final class R {
         public static final int buttonlabel_logout=0x7f060006;
         public static final int buttonlabel_newphoto=0x7f060003;
         public static final int buttonlabel_refresh=0x7f060004;
+        public static final int buttonlabel_reset_password=0x7f06001e;
         public static final int buttonlabel_signup=0x7f060007;
         public static final int buttonlabel_uploadphoto=0x7f060008;
-        public static final int default_description=0x7f060019;
+        public static final int default_description=0x7f06001c;
         public static final int hello_world=0x7f060002;
-        public static final int hint_comment=0x7f060014;
-        public static final int hint_password=0x7f060013;
-        public static final int hint_photo_question=0x7f060015;
-        public static final int hint_username=0x7f060012;
-        public static final int label_loginlink=0x7f06000f;
-        public static final int label_signuplink=0x7f06000e;
-        public static final int label_welcome=0x7f060010;
-        public static final int label_welcome_signup=0x7f060011;
+        public static final int hint_comment=0x7f060015;
+        public static final int hint_email=0x7f060017;
+        public static final int hint_password=0x7f060014;
+        public static final int hint_photo_question=0x7f060016;
+        public static final int hint_reset_password_email=0x7f060018;
+        public static final int hint_username=0x7f060013;
+        public static final int label_goto_forgot_password=0x7f06001d;
+        public static final int label_loginlink=0x7f060010;
+        public static final int label_reset_password_welcome=0x7f06001f;
+        public static final int label_signuplink=0x7f06000f;
+        public static final int label_welcome=0x7f060011;
+        public static final int label_welcome_signup=0x7f060012;
         public static final int message_loadingphoto=0x7f060009;
         public static final int message_login=0x7f06000a;
-        public static final int message_photo_question=0x7f06000d;
+        public static final int message_photo_question=0x7f06000e;
+        public static final int message_reset_password_sent=0x7f06000c;
         public static final int message_signup=0x7f06000b;
-        public static final int message_uploadingphoto=0x7f06000c;
-        public static final int ok=0x7f060018;
-        public static final int toast_mask=0x7f060016;
-        public static final int toast_mask_preview=0x7f060017;
+        public static final int message_uploadingphoto=0x7f06000d;
+        public static final int ok=0x7f06001b;
+        public static final int toast_mask=0x7f060019;
+        public static final int toast_mask_preview=0x7f06001a;
     }
     public static final class style {
         /** 

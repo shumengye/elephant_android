@@ -50,13 +50,28 @@
 	        android:hint="@string/hint_username"
 	        android:inputType="text|textNoSuggestions" >
 	    </EditText>
+	    
+	    <!-- Email field -->
+	    <EditText
+	        android:id="@+id/signupEmail"
+	        android:layout_width="240dp"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/signupUsername"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="9dp"
+	        android:focusable="true"
+	        android:gravity="center"
+	        android:hint="@string/hint_email"
+	        android:inputType="textEmailAddress"
+	        android:typeface="sans" >
+	    </EditText>
 		    
 	    <!-- Password field -->
 	    <EditText
 	        android:id="@+id/signupPassword"
 	        android:layout_width="240dp"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/signupUsername"
+	        android:layout_below="@+id/signupEmail"
 	        android:layout_centerHorizontal="true"
 	        android:gravity="center" 
 	        android:layout_marginTop="9dp"

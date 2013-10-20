@@ -71,16 +71,30 @@
 	        android:background="@drawable/custom_button"
 	        android:text="@string/buttonlabel_login" />
 	      
+	      <!-- Forgot password link? -->
+
+	      <TextView
+	          android:id="@+id/goToForgotPassword"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_below="@+id/loginButton"
+	          android:layout_centerHorizontal="true"
+	          android:layout_marginTop="26dp"
+	          android:clickable="true"
+	          android:gravity="center"
+	          android:onClick="onShowForgotPassword"
+	          android:text="@string/label_goto_forgot_password" />
+	      
 	      <!-- Displays login errors -->
 	      <TextView
 	          android:id="@+id/error"
 	          android:layout_width="wrap_content"
 	          android:layout_height="wrap_content"
-	          android:layout_below="@+id/loginButton"
+	          android:layout_below="@+id/goToForgotPassword"
 	          android:layout_centerHorizontal="true"
 	          android:layout_marginTop="18dp"
-	          android:gravity="center"
-	          android:textSize="15sp" />
+	          android:gravity="center" />
+	     
  
 </RelativeLayout>
 

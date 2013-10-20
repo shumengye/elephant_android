@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.shumengye.elephant.R;
 
 public class LoginActivity extends FragmentActivity implements LoginFragment.LoginViewListener, SignupFragment.SignupViewListener  {
 	
@@ -99,6 +99,18 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		Intent intent = new Intent(this, PhotoListActivity.class);
 		startActivity(intent);	
 		finish();
+	}
+
+	public void onShowForgotPassword(View v) {
+		ResetPasswordFragment passwordFragment = new ResetPasswordFragment();
+		
+		FragmentManager fragManager = getFragmentManager();		
+		FragmentTransaction transaction = fragManager.beginTransaction();	
+		
+		transaction.replace(R.id.fragmentLayout, passwordFragment);
+		transaction.addToBackStack(null);
+		transaction.commit();	
+		
 	}
 
 
