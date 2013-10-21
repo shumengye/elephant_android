@@ -10,19 +10,39 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ResetPasswordFragment extends Fragment {
 	private View view;
+	SignupViewListener activityCallback;
+
+	public interface SignupViewListener {
+		public void onShowLogin();
+		public void onLogin();
+		public boolean isInternetConnected();
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+	    super.onAttach(activity);
+
+	    try {
+	       activityCallback = (SignupViewListener) activity;
+	    } catch (ClassCastException e) {
+	        throw new ClassCastException(activity.toString()
+	                + " must implement LoginViewListener");
+	    }
+	}
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +53,15 @@ public class ResetPasswordFragment extends Fragment {
 	    final String email = ((TextView) view.findViewById(R.id.email)).getText().toString();
 	    loginButton.setOnClickListener(new View.OnClickListener() {
 	    	public void onClick(View v) {
-	    		new SendResetPasswordEmail().execute(email);
+	    		// Check for network connection
+	    		if (activityCallback.isInternetConnected() == false) {
+	    			Toast toast = Toast.makeText(getActivity(), R.string.toast_no_internet, Toast.LENGTH_LONG);
+	    			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
+	    			toast.show();
+	    			return;
+	    		}
+	    		else
+	    			new SendResetPasswordEmail().execute(email);
 	        }
 	    });
 	    

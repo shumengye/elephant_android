@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -28,6 +30,7 @@ public class SignupFragment extends Fragment {
 	public interface SignupViewListener {
 		public void onShowLogin();
 		public void onLogin();
+		public boolean isInternetConnected();
 	}
 	
 	@Override
@@ -71,6 +74,14 @@ public class SignupFragment extends Fragment {
     }
 	
 	private void signupUser() {
+		// Check for network connection
+		if (activityCallback.isInternetConnected() == false) {
+			Toast toast = Toast.makeText(getActivity(), R.string.toast_no_internet, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		}
+		
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this.getActivity());
 		loader.setMessage(getString(R.string.message_signup));
@@ -115,7 +126,7 @@ public class SignupFragment extends Fragment {
 				loader.dismiss();
 				
 			    if (user != null) {
-			    	// Notify activity of successful login
+			    	// Activity callback of successful login
 			    	activityCallback.onLogin();
 			    } else {
 			    	// Show error

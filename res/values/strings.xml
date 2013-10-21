@@ -33,6 +33,7 @@
     
     <string name="toast_mask">&#x2193; Touch and move to explore</string>
     <string name="toast_mask_preview">&#x2193; Touch and move preview</string>
+     <string name="toast_no_internet">Network connection required</string>
     
     <string name="ok">OK</string>
     <string name="default_description"></string>

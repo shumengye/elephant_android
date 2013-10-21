@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -27,6 +29,7 @@ public class LoginFragment extends Fragment {
 	public interface LoginViewListener {
 		public void onShowSignUp();
 		public void onLogin();
+		public boolean isInternetConnected();
 	}
 	
 	@Override
@@ -57,8 +60,9 @@ public class LoginFragment extends Fragment {
 	    final EditText p = ((EditText) view.findViewById(R.id.loginPassword));
 	    p.setOnEditorActionListener(new OnEditorActionListener() {
 	        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-	            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE))
+	            if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
 	            	loginUser();
+	            }
 	            return true;
 	        }
 	    });
@@ -68,9 +72,17 @@ public class LoginFragment extends Fragment {
 	    
 	    return view;    
     }
+
 	
-	
-	private void loginUser() {	
+	private void loginUser() {			
+		// Check for network connection
+		if (activityCallback.isInternetConnected() == false) {
+			Toast toast = Toast.makeText(getActivity(), R.string.toast_no_internet, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		}
+		
 		// Show progress loader
 		final ProgressDialog loader = new ProgressDialog(this.getActivity());
 		loader.setMessage(getString(R.string.message_login));
@@ -86,6 +98,7 @@ public class LoginFragment extends Fragment {
 				loader.dismiss();
 				
 			    if (user != null) {
+			    	// Activity callback of successful login
 			    	activityCallback.onLogin();
 			    } else {
 			    	// Show error
@@ -100,5 +113,6 @@ public class LoginFragment extends Fragment {
 	{
 	  return Character.toUpperCase(line.charAt(0)) + line.substring(1);
 	}
+
 	
 }

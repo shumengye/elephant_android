@@ -129,10 +129,10 @@ public final class R {
         public static final int buttonlabel_logout=0x7f060006;
         public static final int buttonlabel_newphoto=0x7f060003;
         public static final int buttonlabel_refresh=0x7f060004;
-        public static final int buttonlabel_reset_password=0x7f06001e;
+        public static final int buttonlabel_reset_password=0x7f06001f;
         public static final int buttonlabel_signup=0x7f060007;
         public static final int buttonlabel_uploadphoto=0x7f060008;
-        public static final int default_description=0x7f06001c;
+        public static final int default_description=0x7f06001d;
         public static final int hello_world=0x7f060002;
         public static final int hint_comment=0x7f060015;
         public static final int hint_email=0x7f060017;
@@ -140,9 +140,9 @@ public final class R {
         public static final int hint_photo_question=0x7f060016;
         public static final int hint_reset_password_email=0x7f060018;
         public static final int hint_username=0x7f060013;
-        public static final int label_goto_forgot_password=0x7f06001d;
+        public static final int label_goto_forgot_password=0x7f06001e;
         public static final int label_loginlink=0x7f060010;
-        public static final int label_reset_password_welcome=0x7f06001f;
+        public static final int label_reset_password_welcome=0x7f060020;
         public static final int label_signuplink=0x7f06000f;
         public static final int label_welcome=0x7f060011;
         public static final int label_welcome_signup=0x7f060012;
@@ -152,9 +152,10 @@ public final class R {
         public static final int message_reset_password_sent=0x7f06000c;
         public static final int message_signup=0x7f06000b;
         public static final int message_uploadingphoto=0x7f06000d;
-        public static final int ok=0x7f06001b;
+        public static final int ok=0x7f06001c;
         public static final int toast_mask=0x7f060019;
         public static final int toast_mask_preview=0x7f06001a;
+        public static final int toast_no_internet=0x7f06001b;
     }
     public static final class style {
         /** 

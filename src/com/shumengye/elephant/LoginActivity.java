@@ -2,7 +2,10 @@ package com.shumengye.elephant;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -142,5 +145,14 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		invalidateOptionsMenu();
 	}
 
-
+	public boolean isInternetConnected() {
+		// Determine if internet access
+		ConnectivityManager cm =
+		        (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+		 
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null &&
+		                      activeNetwork.isConnectedOrConnecting();
+		return isConnected;
+	}
 }

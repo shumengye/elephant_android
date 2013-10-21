@@ -3,15 +3,20 @@ package com.shumengye.elephant;
 import java.io.File;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
@@ -36,7 +41,7 @@ public class PhotoListActivity extends ListActivity {
 		mainAdapter = new PhotoListAdapter(this);
 		mainAdapter.setTextKey("question");
 		
-		setListAdapter(mainAdapter);
+		loadElephantPhotoList();
 	}
 
 	@Override
@@ -57,9 +62,9 @@ public class PhotoListActivity extends ListActivity {
 	    	    startActivityForResult(cameraIntent, TAKE_PHOTO_CODE);
 	        	
 	            return true;
-	        // Refresh list 
+	        // load list 
 	        case R.id.refresh:
-	        	refreshElephantPhotoList(); 
+	        	loadElephantPhotoList(); 
 	        	return true;
 	        // Logout
 	        case R.id.logout:
@@ -79,7 +84,7 @@ public class PhotoListActivity extends ListActivity {
 		
 		// Returning from user login
 		if (requestCode == USER_LOGIN_CODE && resultCode == RESULT_OK) {
-			refreshElephantPhotoList();
+			loadElephantPhotoList();
 		}
 		
 		// Returning from taking photo with camera
@@ -93,24 +98,53 @@ public class PhotoListActivity extends ListActivity {
 		
 		// Returning from creating new elephant photo
 		if (requestCode == NEW_PHOTO_CODE && resultCode == RESULT_OK) {
-			refreshElephantPhotoList();
+			loadElephantPhotoList();
 		}	
 	 }
 	
-	public void refreshElephantPhotoList() {
-		mainAdapter.loadObjects();
-		setListAdapter(mainAdapter);
+	public boolean isInternetConnected() {
+		// Determine if internet access
+		ConnectivityManager cm =
+		        (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+		 
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null &&
+		                      activeNetwork.isConnectedOrConnecting();
+		return isConnected;
+	}
+	
+	public void loadElephantPhotoList() {
+		// Check for network connection
+		if (this.isInternetConnected() == false) {
+			Toast toast = Toast.makeText(this, R.string.toast_no_internet, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		}
+		else {
+			// Re-load adapter
+			mainAdapter.loadObjects();
+			setListAdapter(mainAdapter);
+		}
 	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		// Open detail view for selected photo
-		Photo photo = (Photo) getListAdapter().getItem(position);
-		Intent intent = new Intent(this, PhotoDetailActivity.class);
-		intent.putExtra("photoId", photo.getObjectId());
-		intent.putExtra("senderName", photo.getSenderName());
-		intent.putExtra("question", photo.getQuestion());
-		startActivity(intent);	 
-
+		// Check for network connection
+		if (this.isInternetConnected() == false) {
+			Toast toast = Toast.makeText(this, R.string.toast_no_internet, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 0);
+			toast.show();
+			return;
+		}
+		else {
+			// Open detail view for selected photo
+			Photo photo = (Photo) getListAdapter().getItem(position);
+			Intent intent = new Intent(this, PhotoDetailActivity.class);
+			intent.putExtra("photoId", photo.getObjectId());
+			intent.putExtra("senderName", photo.getSenderName());
+			intent.putExtra("question", photo.getQuestion());
+			startActivity(intent);	 
+		}
 	}
 }
