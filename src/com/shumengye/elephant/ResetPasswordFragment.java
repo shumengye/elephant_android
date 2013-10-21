@@ -14,6 +14,8 @@ import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,10 +36,11 @@ public class ResetPasswordFragment extends Fragment {
 	    		new SendResetPasswordEmail().execute(email);
 	        }
 	    });
-        
+	    
 	    return view;    
     }	
 	
+
 	private class SendResetPasswordEmail extends AsyncTask<String, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(String... userEmail) {	

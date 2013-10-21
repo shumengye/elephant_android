@@ -40,36 +40,63 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		FragmentManager fragManager = getFragmentManager();		
 		FragmentTransaction transaction = fragManager.beginTransaction();		
 
-		transaction.add(R.id.fragmentLayout, loginFragment);	
+		transaction.add(R.id.fragmentLayout, loginFragment, "LOGIN");	
 		transaction.commit();  
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.login, menu);		
+		getMenuInflater().inflate(R.menu.login, menu);	
+		// By default hide the login option since login fragment is shown
+		MenuItem item = menu.findItem(R.id.goToLogin);
+		item.setVisible(false);
 		return true;
 	}
 	
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+		// Toggle signup and login screens
 	    switch (item.getItemId()) {
-	    	// Toggle signup and login screens
 	        case R.id.goToSignup:
-	        	
-	        	if (item.getTitle().equals("Sign up")) {
-	        		item.setTitle("Log in");
-	        		onShowSignUp();
-	        	}
-	        	else {
-	        		item.setTitle("Sign up");
-	        		onShowLogin();
-	        	}
-	        	
+	        	invalidateOptionsMenu(); 
+	        	onShowSignUp();
 	            return true;
+	        case R.id.goToLogin:
+	        	invalidateOptionsMenu(); 	
+	        	onShowLogin();	        	
+	        	return true; 
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// Depending on active frament, show either login or signup menu option or both
+		MenuItem loginOption = menu.findItem(R.id.goToLogin);
+		MenuItem signupOption = menu.findItem(R.id.goToSignup);
+
+		LoginFragment loginFragment = (LoginFragment)getFragmentManager().findFragmentByTag("LOGIN");
+		if (loginFragment != null && loginFragment.isVisible()) {
+			loginOption.setVisible(false);			
+			signupOption.setVisible(true);
+		}
+			
+		SignupFragment signupFragment = (SignupFragment)getFragmentManager().findFragmentByTag("SIGNUP");
+		if (signupFragment != null && signupFragment.isVisible()) {
+			loginOption.setVisible(true);			
+			signupOption.setVisible(false);
+		}
+		
+		// Show both login and signup menu options on password reset screen
+		ResetPasswordFragment passwordFragment = (ResetPasswordFragment)getFragmentManager().findFragmentByTag("PASSWORD");
+		if (passwordFragment != null && passwordFragment.isVisible()) {
+			loginOption.setVisible(true);			
+			signupOption.setVisible(true);
+		}
+		
+		return true;
 	}
 
 	public void onShowSignUp() {
@@ -78,7 +105,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		FragmentManager fragManager = getFragmentManager();		
 		FragmentTransaction transaction = fragManager.beginTransaction();	
 		
-		transaction.replace(R.id.fragmentLayout, signupFragment);
+		transaction.replace(R.id.fragmentLayout, signupFragment, "SIGNUP");
 		transaction.addToBackStack(null);
 		transaction.commit();	
 	}
@@ -89,7 +116,7 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		FragmentManager fragManager = getFragmentManager();		
 		FragmentTransaction transaction = fragManager.beginTransaction();	
 		
-		transaction.replace(R.id.fragmentLayout, loginFragment);
+		transaction.replace(R.id.fragmentLayout, loginFragment, "LOGIN");
 		transaction.addToBackStack(null);
 		transaction.commit();	
 		
@@ -107,10 +134,12 @@ public class LoginActivity extends FragmentActivity implements LoginFragment.Log
 		FragmentManager fragManager = getFragmentManager();		
 		FragmentTransaction transaction = fragManager.beginTransaction();	
 		
-		transaction.replace(R.id.fragmentLayout, passwordFragment);
+		transaction.replace(R.id.fragmentLayout, passwordFragment, "PASSWORD");
 		transaction.addToBackStack(null);
 		transaction.commit();	
 		
+		// Update menu
+		invalidateOptionsMenu();
 	}
 
 

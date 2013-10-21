@@ -67,7 +67,8 @@ public final class R {
         public static final int error=0x7f09001f;
         public static final int fragmentLayout=0x7f090003;
         public static final int goToForgotPassword=0x7f09001e;
-        public static final int goToSignup=0x7f090028;
+        public static final int goToLogin=0x7f090028;
+        public static final int goToSignup=0x7f090029;
         public static final int handle=0x7f090011;
         public static final int icon=0x7f090009;
         public static final int iconContainer=0x7f09000d;
@@ -78,12 +79,12 @@ public final class R {
         public static final int loginPassword=0x7f09001c;
         public static final int loginUsername=0x7f09001b;
         public static final int logo=0x7f090019;
-        public static final int logout=0x7f09002b;
+        public static final int logout=0x7f09002c;
         public static final int msg=0x7f090022;
         public static final int newComment=0x7f090017;
         public static final int newCommentButton=0x7f090018;
         public static final int newPhotoButton=0x7f090006;
-        public static final int new_photo=0x7f090029;
+        public static final int new_photo=0x7f09002a;
         public static final int photoQuestion=0x7f090005;
         public static final int photoinfo_arrow=0x7f090016;
         public static final int photoinfo_chat=0x7f090012;
@@ -91,7 +92,7 @@ public final class R {
         public static final int photoinfo_question=0x7f090014;
         public static final int photoinfo_user=0x7f090015;
         public static final int question=0x7f09000a;
-        public static final int refresh=0x7f09002a;
+        public static final int refresh=0x7f09002b;
         public static final int resetPasswordButton=0x7f090021;
         public static final int senderName=0x7f09000b;
         public static final int signupButton=0x7f090027;
