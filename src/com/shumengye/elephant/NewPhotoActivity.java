@@ -240,30 +240,8 @@ public class NewPhotoActivity extends Activity {
 		int startY = (origBmp.getHeight() / 2) - (d / 2);		
 				
 		Bitmap thumb = Bitmap.createBitmap(origBmp, startX, startY, d, d);
-		thumb = getRoundedCornerBitmap(thumb);
 		
 		return thumb;
-	}
-	
-	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
-		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-	            bitmap.getHeight(), Config.ARGB_8888);
-	    Canvas canvas = new Canvas(output);
-
-	    final int color = 0xff424242;
-	    final Paint paint = new Paint();
-	    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-
-	    paint.setAntiAlias(true);
-	    canvas.drawARGB(0, 0, 0, 0);
-	    paint.setColor(color);
-
-	    canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-	            bitmap.getWidth() / 2, paint);
-	    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-	    canvas.drawBitmap(bitmap, rect, rect, paint);
-	   
-	    return output;
 	}
 
 }

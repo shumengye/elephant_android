@@ -4,6 +4,15 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.Bitmap.Config;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,7 +23,6 @@ import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
-import com.shumengye.elephant.R;
 
 public class PhotoListAdapter extends ParseQueryAdapter<Photo> {
 
@@ -40,12 +48,18 @@ public class PhotoListAdapter extends ParseQueryAdapter<Photo> {
 		// Thumbnail
 		ParseImageView thumbImage = (ParseImageView) v.findViewById(R.id.icon);
 		ParseFile thumbFile = photo.getImageThumb();
+		final View theView = v;
+		
 		if (thumbFile != null) {
 			thumbImage.setParseFile(thumbFile);
 			thumbImage.loadInBackground(new GetDataCallback() {
 				@Override
 				public void done(byte[] data, ParseException e) {
-					// nothing to do
+					
+					// Create rounded thumbnails
+					ParseImageView thumbImage2 = (ParseImageView) theView.findViewById(R.id.icon);
+			        Bitmap bmp = ((BitmapDrawable)thumbImage2.getDrawable()).getBitmap();
+			        thumbImage2.setImageBitmap(getRoundedCornerBitmap(bmp));
 				}
 			});
 		}
@@ -66,5 +80,27 @@ public class PhotoListAdapter extends ParseQueryAdapter<Photo> {
 		
 		return v;
 	}
+	
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap) {
+		Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+	            bitmap.getHeight(), Config.ARGB_8888);
+	    Canvas canvas = new Canvas(output);
+
+	    final int color = 0xff424242;
+	    final Paint paint = new Paint();
+	    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+	    paint.setAntiAlias(true);
+	    canvas.drawARGB(0, 0, 0, 0);
+	    paint.setColor(color);
+
+	    canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+	            bitmap.getWidth() / 2, paint);
+	    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
+	    canvas.drawBitmap(bitmap, rect, rect, paint);
+	   
+	    return output;
+	}
+
 
 }
